@@ -17,7 +17,7 @@ import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 import VueMacros from 'unplugin-vue-macros/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
-import Vuetify from 'vite-plugin-vuetify'
+import vuetify from 'vite-plugin-vuetify'
 
 export default defineConfig({
   resolve: {
@@ -77,7 +77,7 @@ export default defineConfig({
     // see unocss.config.ts for config
     Unocss(),
 
-    Vuetify({}),
+    vuetify(),
 
     // https://github.com/antfu/vite-plugin-vue-markdown
     // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
@@ -173,6 +173,6 @@ export default defineConfig({
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/],
+    noExternal: ['workbox-window', /vue-i18n/, 'vuetify'],
   },
 })
