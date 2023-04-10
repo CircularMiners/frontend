@@ -157,7 +157,7 @@ export default defineConfig({
     include: ['test/**/*.test.ts'],
     environment: 'jsdom',
     deps: {
-      inline: ['@vue', '@vueuse', 'vue-demi'],
+      inline: ['@vue', '@vueuse', 'vue-demi', 'element-plus'],
     },
   },
 
