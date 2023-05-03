@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="filteredResults.length > 0">
+    <div v-if="filteredResults.length>0">
     <v-card v-for="(company, index) in filteredResults" :key="index" mb="6">
-      <v-card-title>{{ company.companyName }}</v-card-title>
+      <v-card-title>{{ company.companyName }} </v-card-title>
       <v-card-text>
         <p><b>Company Name:</b> {{ company.companyName }}</p>
         <p><b>Location:</b> {{ company.location }}</p>
@@ -65,7 +65,9 @@ export default {
       return this.mockData.filter((data) => {
         return (
           data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          data.location.toLowerCase().includes(this.searchTerm.toLowerCase())
+          data.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          data.mineralName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          data.materialName.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
       });
     }

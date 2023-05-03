@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SearchResults from '~/components/SearchResults.vue';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 interface Company {
   id: number;
@@ -62,20 +62,7 @@ const mockData: Company[] = [
   },
 ];
 
-
 const searchTerm = ref('');
-const filteredResults = computed(() => {
-  if (searchTerm.value === "") {
-    return [];
-  }
-  return mockData.filter((data) => {
-    return (
-      data.materialName.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-      data.mineralName.toLowerCase().includes(searchTerm.value.toLowerCase())
-    );
-  });
-});
-
 const search = () => {
   // Do nothing since `filteredResults` is already being computed based on `searchTerm`.
 };
@@ -109,7 +96,7 @@ const search = () => {
     <!-- search results -->
     <v-row>
       <v-col cols="12">
-        <SearchResults :searchResults="filteredResults" :searchTerm="searchTerm" :mockData="mockData" />
+        <SearchResults :searchTerm="searchTerm" :mockData="mockData" />
       </v-col>
     </v-row>
   </v-container>
