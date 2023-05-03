@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-if="filteredResults.length > 0">
     <v-card v-for="(company, index) in filteredResults" :key="index" mb="6">
       <v-card-title>{{ company.companyName }}</v-card-title>
       <v-card-text>
@@ -22,6 +23,7 @@
 </v-btn>
       </v-layout>
     </v-card>
+    </div>
     <p v-if="searchTerm && filteredResults.length === 0">{{ noResultsText }} "{{ searchTerm }}"</p>
     <overlay-form v-if="showOverlayForm" @close-overlay="showOverlayForm = false"></overlay-form>
   </div>
@@ -58,7 +60,7 @@ export default {
   computed: {
   filteredResults() {
     if (!this.searchTerm) {
-      return [{}]; // return an empty object as the first value
+      return []; // return an empty object as the first value
     } else {
       return this.mockData.filter((data) => {
         return (
