@@ -1,33 +1,4 @@
-<template>
-    <v-overlay :value="showOverlay" @click="showOverlay = true">
-      <v-card max-width="600" class="pa-4">
-        <v-toolbar dense>
-          <!-- <v-toolbar-ttle class="text-h5"> Request Form </v-toolbar-title> -->
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showOverlay = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-divider class="mt-2"></v-divider>
-        <v-form @submit.prevent="submitRequest">
-          <v-textarea
-            label="Message"
-            v-model="message"
-            required
-            auto-grow
-            :counter="messageCounter"
-            :rules="[messageRule]"
-          ></v-textarea>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn type="submit" color="primary" :disabled="!validRequest">Send</v-btn>
-          </v-card-actions>
-        </v-form>
-      </v-card>
-    </v-overlay>
-  </template>
-  
-  <script>
+   <script>
   export default {
     name: "RequestOverlay",
     props: {
@@ -68,4 +39,34 @@
     },
   };
   </script>
+
+<template>
+  <v-overlay :value="showOverlay" @click="showOverlay = true">
+    <v-card max-width="600" class="pa-4">
+      <v-toolbar dense>
+        <!-- <v-toolbar-ttle class="text-h5"> Request Form </v-toolbar-title> -->
+        <v-spacer></v-spacer>
+        <v-btn icon @click="showOverlay = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <v-divider class="mt-2"></v-divider>
+      <v-form @submit.prevent="submitRequest">
+        <v-textarea
+          label="Message"
+          v-model="message"
+          required
+          auto-grow
+          :counter="messageCounter"
+          :rules="[messageRule]"
+        ></v-textarea>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn type="submit" color="primary" :disabled="!validRequest">Send</v-btn>
+        </v-card-actions>
+      </v-form>
+    </v-card>
+  </v-overlay>
+</template>
+
   

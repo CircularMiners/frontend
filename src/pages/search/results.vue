@@ -1,33 +1,40 @@
+<script>
+export default {
+  data() {
+    return {
+      company: null,
+    };
+  },
+  created() {
+    // Get the companyId from the route params
+    const companyId = this.$route.params.companyId;
+
+    // Find the company with the matching id from the mock data
+    const fetchedData = mockData.find((company) => company.id === parseInt(companyId));
+
+    // Update company with fetched data
+    this.company = fetchedData;
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+  },
+};
+</script>
+
 <template>
   <v-container>
-    <v-row justify="center">
-      <v-col cols="12">
-        <h1 style="text-align:center; font-weight:bold; font-size:32px">Results for Company:company ID</h1>
-      </v-col>
-      <v-col cols="12">
-        <table style="width:100%">
-          <thead>
-            <tr>
-              <th>Mineral</th>
-              <th>Percentage</th>
-              <th>Purity</th>
-              <th>Moisture</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Value</td>
-              <td>Value</td>
-              <td>Value</td>
-              <td>Value</td>
-            </tr>
-          </tbody>
-        </table>
-      </v-col>
-    </v-row>
-    </v-container>
-  </template>
-  
-  <script lang="ts">
-  </script>
-  
+    <v-card v-if="company" class="mb-6">
+      <v-card-title>
+        {{ company.name }}
+      </v-card-title>
+      <v-card-text>
+        {{ company.location }}
+      </v-card-text>
+    </v-card>
+    <v-btn @click="goBack" class="mr-4">
+      Back
+    </v-btn>
+  </v-container>
+</template>
