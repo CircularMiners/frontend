@@ -17,7 +17,9 @@
         <span style="padding-left: 6rem;">Moisture %: {{ company.moisture }}</span></p>     
       </v-card-text>
       <v-layout justify-end align-start mb="3" mr="3">
-        <v-btn :color="company.access ? 'green' : 'red'" @click="company.access ? openAccessPage(company.id) : showOverlayForm(company.id)">
+        <!-- <v-btn :color="company.access ? 'green' : 'red'" @click="company.access ? openAccessPage(company.id) : showOverlayForm(company.id)"> -->
+        <v-btn :color="company.access ? 'green' : 'red'" @click="company.access ? $router.push('/search/results') : showOverlayForm(company.id)">
+
   {{ company.access ? 'Open Access' : 'Request Access' }}
 </v-btn>
       </v-layout>

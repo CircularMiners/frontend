@@ -1,5 +1,6 @@
 <template>
-    <v-overlay :value="showOverlay" @click="showOverlay = true">
+    <p>Overlay Form</p>
+    <v-overlay :value="showOverlay" @click="showOverlay = false">
       <v-card max-width="600" class="pa-4">
         <v-toolbar dense>
           <!-- <v-toolbar-ttle class="text-h5"> Request Form </v-toolbar-title> -->
