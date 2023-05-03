@@ -65,7 +65,7 @@ const mockData: Company[] = [
 
 const searchTerm = ref('');
 const filteredResults = computed(() => {
-  if (searchTerm.value === '') {
+  if (searchTerm.value === "") {
     return [];
   }
   return mockData.filter((data) => {

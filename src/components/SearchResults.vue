@@ -17,9 +17,7 @@
         <span style="padding-left: 6rem;">Moisture %: {{ company.moisture }}</span></p>     
       </v-card-text>
       <v-layout justify-end align-start mb="3" mr="3">
-        <!-- <v-btn :color="company.access ? 'green' : 'red'" @click="company.access ? openAccessPage(company.id) : showOverlayForm(company.id)"> -->
-        <v-btn :color="company.access ? 'green' : 'red'" @click="company.access ? $router.push('/search/results') : showOverlayForm(company.id)">
-
+        <v-btn :color="company.access ? 'green' : 'red'" @click="company.access ? openAccessPage(company.id) : showOverlayForm(company.id)">
   {{ company.access ? 'Open Access' : 'Request Access' }}
 </v-btn>
       </v-layout>
@@ -58,14 +56,18 @@ export default {
     };
   },
   computed: {
-    filteredResults() {
+  filteredResults() {
+    if (!this.searchTerm) {
+      return [{}]; // return an empty object as the first value
+    } else {
       return this.mockData.filter((data) => {
         return (
-          data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+          data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           data.location.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
       });
-    },
+    }
+  },
   },
   methods: {
     openOverlayForm(companyId) {
