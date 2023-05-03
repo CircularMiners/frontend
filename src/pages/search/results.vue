@@ -1,8 +1,13 @@
+<script lang="ts">
+</script>
+
 <template>
   <v-container>
     <v-row justify="center">
       <v-col cols="12">
-        <h1 style="text-align:center; font-weight:bold; font-size:32px">Results for Company:company ID</h1>
+        <h1 style="text-align:center; font-weight:bold; font-size:32px">
+          Results for Company:company ID
+        </h1>
       </v-col>
       <v-col cols="12">
         <table style="width:100%">
@@ -25,9 +30,5 @@
         </table>
       </v-col>
     </v-row>
-    </v-container>
-  </template>
-  
-  <script lang="ts">
-  </script>
-  
+  </v-container>
+</template>
