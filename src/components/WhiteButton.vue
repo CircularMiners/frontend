@@ -5,11 +5,11 @@ const props = defineProps <{
 </script>
 
 <template>
-    <v-btn
+  <v-btn
     outlined
-  color="1c658c"
-  class="ma-2"
->
-          {{props.buttonName}}
-        </v-btn>
+    color="1c658c"
+    class="ma-2"
+  >
+    {{ props.buttonName }}
+  </v-btn>
 </template>

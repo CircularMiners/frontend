@@ -10,6 +10,9 @@ dependencies:
   '@vueuse/head':
     specifier: ^1.1.23
     version: 1.1.23(vue@3.2.47)
+  material-design-icons-iconfont:
+    specifier: ^6.7.0
+    version: 6.7.0
   nprogress:
     specifier: ^0.2.0
     version: 0.2.0
@@ -6989,6 +6992,10 @@ packages:
       mdurl: 1.0.1
       uc.micro: 1.0.6
     dev: true
+
+  /material-design-icons-iconfont@6.7.0:
+    resolution: {integrity: sha512-lSj71DgVv20kO0kGbs42icDzbRot61gEDBLQACzkUuznRQBUYmbxzEkGU6dNBb5fRWHMaScYlAXX96HQ4/cJWA==}
+    dev: false
 
   /mdast-util-from-markdown@0.8.5:
     resolution: {integrity: sha512-2hkTXtYYnr+NubD/g6KGBS/0mFmBcifAsI0yIWRiRo0PjVs6SSOSOdtzbp6kSGnShDN6G5aWZpKQ2lWRy27mWQ==}

@@ -20,6 +20,7 @@
     "@unocss/reset": "^0.50.6",
     "@vueuse/core": "^9.13.0",
     "@vueuse/head": "^1.1.23",
+    "material-design-icons-iconfont": "^6.7.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.33",
     "vite-plugin-vuetify": "^1.0.2",

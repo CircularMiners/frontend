@@ -26,4 +26,5 @@
     "*.css": "postcss"
   },
   "editor.formatOnSave": true,
+  "files.autoSave": "afterDelay"
 }

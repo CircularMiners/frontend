@@ -3,24 +3,24 @@ export default {
   data() {
     return {
       company: null,
-    };
+    }
   },
   created() {
     // Get the companyId from the route params
-    const companyId = this.$route.params.companyId;
+    const companyId = this.$route.params.companyId
 
     // Find the company with the matching id from the mock data
-    const fetchedData = mockData.find((company) => company.id === parseInt(companyId));
+    const fetchedData = mockData.find(company => company.id === parseInt(companyId))
 
     // Update company with fetched data
-    this.company = fetchedData;
+    this.company = fetchedData
   },
   methods: {
     goBack() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
   },
-};
+}
 </script>
 
 <template>
@@ -33,7 +33,7 @@ export default {
         {{ company.location }}
       </v-card-text>
     </v-card>
-    <v-btn @click="goBack" class="mr-4">
+    <v-btn class="mr-4" @click="goBack">
       Back
     </v-btn>
   </v-container>
