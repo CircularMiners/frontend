@@ -91,16 +91,24 @@ export default {
                   <v-text-field v-model="confirmPassword" label="Confirm Password" type="password" class="registration-text-field" :rules="[rules.required, confirmPasswordRule]" />
                 </v-col>
               </v-row>
-              <v-checkbox v-model="acceptTerms" label="I accept the terms and conditions" class="registration-checkbox" />
-              <v-btn type="submit" color="#1C658C" class="mt-4 registration-btn">
-                Register
-              </v-btn>
+              <v-row>
+                <v-col>
+                  <v-checkbox v-model="acceptTerms" label="I accept the terms and conditions" class="registration-checkbox" style="margin-top: 6px;" />
+                </v-col>
+                <v-col>
+                  <v-btn type="submit" color="#1C658C" class="mt-4 registration-btn">
+                    Register
+                  </v-btn>
+                </v-col>
+              </v-row>
             </v-form>
             <div class="registration-separator">
               <span>Already have an account? </span>
-              <v-btn color="#667085" text class="registration-signin-btn">
-                Sign in
-              </v-btn>
+              <router-link to="/login">
+                <v-btn color="#1C658C" text class="registration-login-btn">
+                  Sign in
+                </v-btn>
+              </router-link>
             </div>
           </v-card-text>
         </v-card>
