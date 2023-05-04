@@ -1,10 +1,8 @@
 <script>
+const { mockData } = useCompanyMockDataStore()
+
 export default {
   props: {
-    mockData: {
-      type: Array,
-      required: true,
-    },
     searchTerm: {
       type: String,
       required: true,
@@ -24,7 +22,7 @@ export default {
         return [] // return an empty object as the first value
       }
       else {
-        return this.mockData.filter((data) => {
+        return mockData.filter((data) => {
           return (
             data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase())
           || data.location.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -39,7 +37,7 @@ export default {
         return []
       }
       else {
-        return this.mockData.filter((data) => {
+        return mockData.filter((data) => {
           return (
             data.id === this.companyId
           )
@@ -53,7 +51,7 @@ export default {
       this.companyId = companyId
     },
     openAccessPage(companyId) {
-      this.$router.push({ name: 'Results', params: { companyId } })
+      this.$router.push({ path: `Results/${companyId}`, params: { company: companyId } })
     },
   },
 }
