@@ -50,7 +50,6 @@ export default {
           <v-card-text>
             <v-form @submit.prevent="login">
               <v-radio-group
-                v-model="inline"
                 inline
               >
                 <v-radio
