@@ -6,8 +6,7 @@ const props = defineProps <{
 
 <template>
   <v-btn
-    outlined
-    color="1c658c"
+    color="cyan-darken-2"
     class="ma-2"
   >
     {{ props.buttonName }}

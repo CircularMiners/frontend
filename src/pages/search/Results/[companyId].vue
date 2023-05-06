@@ -53,11 +53,14 @@ const items = computed(() => {
 <template>
   <div>
     <v-card v-if="company" class="mb-6">
-      <v-card-title>
-        {{ company.companyName }}
+      <v-card-title
+        style="text-align:center; font-weight:bold; font-size: xx-large;"
+      >
+        Results for {{ company.companyName }}
       </v-card-title>
-      <v-card-text>
-        {{ company.location }}
+      <v-card-text style="font-size: medium;">
+        Date of update: {{ company.date }} <br>
+        Location: {{ company.location }}
       </v-card-text>
       <v-card-text>
         {{ company.particleWeight }}
@@ -66,19 +69,49 @@ const items = computed(() => {
     <div>
       <p>Vuetify table:</p>
       <v-data-table
+        dense
         :headers="headers"
         :items="items"
         item-key="particleSize"
         class="elevation-1"
-        dense
       />
     </div>
+    <div>
+      <p>Vuetify table, another try:</p>
+      <v-table dense :headers="headers" :items="items" item-key="particleSize" class="elevation-1">
+        <template #header>
+          <tr>
+            <th v-for="header in headers" :key="header.value" class="text-left">
+              {{ header.label }}
+            </th>
+          </tr>
+        </template>
+        <template #body>
+          <tr v-if="!items.length">
+            <td :colspan="headers.length" class="text-center">
+              No data available
+            </td>
+          </tr>
+          <tr v-for="item in items" v-else :key="item.materialName">
+            <td>{{ item.materialName }}</td>
+            <td>{{ item.particleSize }}</td>
+            <td>{{ item.particleWeight }}</td>
+            <td>{{ item.mineralName }}</td>
+            <td>{{ item.percentage }}</td>
+            <td>{{ item.chemicalCode }}</td>
+            <td>{{ item.purity }}</td>
+            <td>{{ item.moisture }}</td>
+          </tr>
+        </template>
+      </v-table>
+    </div>
+
     <div v-if="items.length === 0">
       <p>No data available.</p>
     </div>
 
     <div v-else>
-      <p>TS table:</p>
+      <p>typescript table:</p>
       <table class="table">
         <thead>
           <tr>

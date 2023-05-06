@@ -13,6 +13,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
     chemicalCode: string
     purity: string
     moisture: string
+    date: string
     access: boolean
   }
 
@@ -29,6 +30,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       chemicalCode: 'SiO2',
       purity: '90%',
       moisture: '5%',
+      date: '2021-05-01',
       access: true,
     },
     {
@@ -43,6 +45,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       chemicalCode: 'Al2SiO4',
       purity: '85%',
       moisture: '7%',
+      date: '2021-05-02',
       access: false,
     },
     {
@@ -57,6 +60,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       chemicalCode: 'KAl2(AlSi3O10)(OH)2',
       purity: '95%',
       moisture: '3%',
+      date: '2021-05-03',
       access: true,
     },
   ]
