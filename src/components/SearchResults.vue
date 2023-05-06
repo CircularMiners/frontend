@@ -10,10 +10,8 @@ export default {
   },
   data() {
     return {
-      buttonText: 'Request Access',
-      isButtonActive: false,
       noResultsText: 'No results found for',
-      showOverlayForm: false,
+      testOverlay: false,
     }
   },
   computed: {
@@ -45,10 +43,16 @@ export default {
       }
     },
   },
+  watch: {
+    testOverlay(val) {
+      val && setTimeout(() => {
+        this.testOverlay = false
+      }, 2000)
+    },
+  },
   methods: {
     openOverlayForm(companyId) {
-      this.showOverlayForm = true
-      this.companyId = companyId
+      this.$router.push({ path: `Request/${companyId}`, params: { company: companyId } })
     },
     openAccessPage(companyId) {
       this.$router.push({ path: `Results/${companyId}`, params: { company: companyId } })
@@ -81,17 +85,27 @@ export default {
           </p>
         </v-card-text>
         <v-layout justify-end align-start mb="3" mr="3">
-          <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : showOverlayForm(company.id)">
+          <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : testOverlay = !overlay">
             {{ company.access ? 'Open Access' : 'Request Access' }}
           </v-btn>
         </v-layout>
       </v-card>
+
+      <v-overlay
+        v-model="testOverlay"
+        contained
+        class="align-center justify-center"
+      >
+        <v-btn
+          color="success"
+          @click="overlay = false"
+        >
+          Hide Overlay
+        </v-btn>
+      </v-overlay>
     </div>
     <p v-if="searchTerm && filteredResults.length === 0">
       {{ noResultsText }} "{{ searchTerm }}"
     </p>
-    <OverlayForm v-if="showOverlayForm" @close-overlay="showOverlayForm = false">
-      Overlay
-    </OverlayForm>
   </div>
 </template>
