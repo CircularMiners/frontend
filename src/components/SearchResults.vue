@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       noResultsText: 'No results found for',
-      testOverlay: false,
+      dialog: false,
     }
   },
   computed: {
@@ -43,19 +43,12 @@ export default {
       }
     },
   },
-  watch: {
-    testOverlay(val) {
-      val && setTimeout(() => {
-        this.testOverlay = false
-      }, 2000)
-    },
-  },
   methods: {
-    openOverlayForm(companyId) {
-      this.$router.push({ path: `Request/${companyId}`, params: { company: companyId } })
-    },
     openAccessPage(companyId) {
       this.$router.push({ path: `Results/${companyId}`, params: { company: companyId } })
+    },
+    openDialog(companyId) {
+      this.dialog = true
     },
   },
 }
@@ -85,24 +78,41 @@ export default {
           </p>
         </v-card-text>
         <v-layout justify-end align-start mb="3" mr="3">
-          <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : testOverlay = !overlay">
+          <!-- <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : testOverlay = !overlay">
+            {{ company.access ? 'Open Access' : 'Request Access' }}
+          </v-btn> -->
+          <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : openDialog(company.id)">
             {{ company.access ? 'Open Access' : 'Request Access' }}
           </v-btn>
         </v-layout>
+        <div class="text-center">
+          <v-dialog
+            v-model="dialog"
+            persistent
+            width="auto"
+          >
+            <v-card>
+              <v-card-title style="text-align:center; font-weight:bold; font-size:x-large; margin-top: 20px;">
+                Request access for {{ company.companyName }}
+              </v-card-title>
+              <v-card-text>
+                Write a message to the company. The request will be added to your request history.
+              </v-card-text>
+              <v-col cols="12">
+                <v-textarea
+                  label="Message"
+                  required
+                />
+              </v-col>
+              <v-card-actions style="display: flex; justify-content: center;">
+                <WhiteButton button-name="Cancel" variant="text" @click="dialog = false" />
+                <v-spacer />
+                <WhiteButton button-name="Send" variant="flat" @click="dialog = false" />
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-card>
-
-      <v-overlay
-        v-model="testOverlay"
-        contained
-        class="align-center justify-center"
-      >
-        <v-btn
-          color="success"
-          @click="overlay = false"
-        >
-          Hide Overlay
-        </v-btn>
-      </v-overlay>
     </div>
     <p v-if="searchTerm && filteredResults.length === 0">
       {{ noResultsText }} "{{ searchTerm }}"

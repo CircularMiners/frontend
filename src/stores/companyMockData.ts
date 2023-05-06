@@ -31,7 +31,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       purity: '90%',
       moisture: '5%',
       date: '2021-05-01',
-      access: true,
+      access: false,
     },
     {
       id: 2,
