@@ -12,6 +12,8 @@ export default {
     return {
       noResultsText: 'No results found for',
       dialog: false,
+      confirmationDialog: false,
+      requestMessage: '',
     }
   },
   computed: {
@@ -48,7 +50,8 @@ export default {
       this.$router.push({ path: `Results/${companyId}`, params: { company: companyId } })
     },
     openDialog(companyId) {
-      this.dialog = true
+      this.dialog = false
+      this.confirmationDialog = true
     },
   },
 }
@@ -78,36 +81,41 @@ export default {
           </p>
         </v-card-text>
         <v-layout justify-end align-start mb="3" mr="3">
-          <!-- <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : testOverlay = !overlay">
-            {{ company.access ? 'Open Access' : 'Request Access' }}
-          </v-btn> -->
           <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : openDialog(company.id)">
             {{ company.access ? 'Open Access' : 'Request Access' }}
           </v-btn>
         </v-layout>
         <div class="text-center">
-          <v-dialog
-            v-model="dialog"
-            persistent
-            width="auto"
-          >
+          <v-dialog v-model="dialog" persistent width="auto">
             <v-card>
               <v-card-title style="text-align:center; font-weight:bold; font-size:x-large; margin-top: 20px;">
-                Request access for {{ company.companyName }}
+                Request access for {{ requestCompany.companyName }}
               </v-card-title>
               <v-card-text>
                 Write a message to the company. The request will be added to your request history.
               </v-card-text>
               <v-col cols="12">
-                <v-textarea
-                  label="Message"
-                  required
-                />
+                <v-textarea v-model="requestMessage" label="Message" required />
               </v-col>
               <v-card-actions style="display: flex; justify-content: center;">
                 <WhiteButton button-name="Cancel" variant="text" @click="dialog = false" />
                 <v-spacer />
-                <WhiteButton button-name="Send" variant="flat" @click="dialog = false" />
+                <WhiteButton button-name="Send" variant="flat" @click="sendRequest" />
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="confirmationDialog" persistent max-width="400">
+            <v-card>
+              <v-card-title>
+                <v-icon color="green-darken-3" size="64">
+                  mdi-check-circle-outline
+                </v-icon>
+                <div style="font-size: 24px; font-weight: bold;">
+                  Your request has been sent!
+                </div>
+              </v-card-title>
+              <v-card-actions style="justify-content: center;">
+                <WhiteButton button-name="OK" variant="flat" @click="confirmationDialog = false" />
               </v-card-actions>
             </v-card>
           </v-dialog>
