@@ -32,7 +32,7 @@ const search = () => {
             height="10"
             @keydown.enter="search"
           />
-          <WhiteButton button-name="Search" />
+          <WhiteButton button-name="Search" class="ml-4" />
         </v-row>
       </v-row>
 

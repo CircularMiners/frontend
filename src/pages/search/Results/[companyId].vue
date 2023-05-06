@@ -52,9 +52,13 @@ const items = computed(() => {
 
 <template>
   <div>
+    <WhiteButton
+      button-name="Export"
+      style="margin-bottom: 20px;"
+    />
     <v-card v-if="company" class="mb-6">
       <v-card-title
-        style="text-align:center; font-weight:bold; font-size: xx-large;"
+        style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;"
       >
         Results for {{ company.companyName }}
       </v-card-title>
@@ -62,81 +66,40 @@ const items = computed(() => {
         Date of update: {{ company.date }} <br>
         Location: {{ company.location }}
       </v-card-text>
-      <v-card-text>
-        {{ company.particleWeight }}
-      </v-card-text>
     </v-card>
-    <div>
-      <p>Vuetify table:</p>
-      <v-data-table
-        dense
-        :headers="headers"
-        :items="items"
-        item-key="particleSize"
-        class="elevation-1"
-      />
-    </div>
-    <div>
-      <p>Vuetify table, another try:</p>
-      <v-table dense :headers="headers" :items="items" item-key="particleSize" class="elevation-1">
-        <template #header>
-          <tr>
-            <th v-for="header in headers" :key="header.value" class="text-left">
-              {{ header.label }}
-            </th>
-          </tr>
-        </template>
-        <template #body>
-          <tr v-if="!items.length">
-            <td :colspan="headers.length" class="text-center">
-              No data available
-            </td>
-          </tr>
-          <tr v-for="item in items" v-else :key="item.materialName">
-            <td>{{ item.materialName }}</td>
-            <td>{{ item.particleSize }}</td>
-            <td>{{ item.particleWeight }}</td>
-            <td>{{ item.mineralName }}</td>
-            <td>{{ item.percentage }}</td>
-            <td>{{ item.chemicalCode }}</td>
-            <td>{{ item.purity }}</td>
-            <td>{{ item.moisture }}</td>
-          </tr>
-        </template>
-      </v-table>
-    </div>
-
+    <v-card>
+      <div>
+        <v-table>
+          <thead>
+            <tr>
+              <th v-for="header in headers" :key="header.value">
+                {{ header.label }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in items" :key="index">
+              <td>{{ item.materialName }}</td>
+              <td>{{ item.particleSize }}</td>
+              <td>{{ item.particleWeight }}</td>
+              <td>{{ item.mineralName }}</td>
+              <td>{{ item.percentage }}</td>
+              <td>{{ item.chemicalCode }}</td>
+              <td>{{ item.purity }}</td>
+              <td>{{ item.moisture }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+      </div>
+    </v-card>
     <div v-if="items.length === 0">
       <p>No data available.</p>
     </div>
 
-    <div v-else>
-      <p>typescript table:</p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th v-for="header in headers" :key="header.value">
-              {{ header.label }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in items" :key="index">
-            <td>{{ item.materialName }}</td>
-            <td>{{ item.particleSize }}</td>
-            <td>{{ item.particleWeight }}</td>
-            <td>{{ item.mineralName }}</td>
-            <td>{{ item.percentage }}</td>
-            <td>{{ item.chemicalCode }}</td>
-            <td>{{ item.purity }}</td>
-            <td>{{ item.moisture }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <v-btn class="mr-4" @click="router.back()">
-      Back
-    </v-btn>
+    <WhiteButton
+      button-name="Back"
+      style="margin-top: 20px;"
+      @click="router.back()"
+    />
   </div>
 </template>
