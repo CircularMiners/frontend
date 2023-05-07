@@ -61,7 +61,55 @@ export default {
             <td>{{ companyName }}</td>
             <td>{{ request.date }}</td>
             <td>{{ request.message }}</td>
-            <td>{{ request.status }}</td>
+            <td>
+              <v-btn
+                :color="request.status === 'Pending' ? 'yellow' : request.status === 'Approved' ? 'green' : 'red'"
+                outlined
+                :disabled="request.status === 'Pending'"
+              >
+                {{ request.status }}
+              </v-btn>
+            </td>
+          </tr>
+          <!-- example request -->
+          <tr>
+            <td>{{ companyName }}</td>
+            <td>{{ '2023-05-07' }}</td> <!-- replace with the actual date -->
+            <td>{{ 'This is an example message.' }}</td> <!-- replace with the actual message -->
+            <td>
+              <v-btn
+                variant="tonal" class="text-subtitle-2"
+                color="yellow"
+              >
+                Pending
+              </v-btn>
+            </td>
+          </tr>
+          <tr>
+            <td>{{ companyName }}</td>
+            <td>{{ '2023-05-07' }}</td> <!-- replace with the actual date -->
+            <td>{{ 'This is an example message.' }}</td> <!-- replace with the actual message -->
+            <td>
+              <v-btn
+                variant="tonal" class="text-subtitle-2"
+                color="red"
+              >
+                Rejected
+              </v-btn>
+            </td>
+          </tr>
+          <tr>
+            <td>{{ companyName }}</td>
+            <td>{{ '2023-05-07' }}</td> <!-- replace with the actual date -->
+            <td>{{ 'This is an example message.' }}</td> <!-- replace with the actual message -->
+            <td>
+              <v-btn
+                variant="tonal" class="text-subtitle-2"
+                color="green"
+              >
+                Approved
+              </v-btn>
+            </td>
           </tr>
         </tbody>
       </v-table>
