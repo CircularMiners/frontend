@@ -97,33 +97,35 @@ export default {
               <v-col cols="12">
                 <v-textarea v-model="requestMessage" label="Message" required />
               </v-col>
-              <v-card-actions style="display: flex; justify-content: center;">
+              <v-card-actions style="justify-content: center;">
                 <WhiteButton button-name="Cancel" variant="text" @click="dialog = false" />
                 <v-spacer />
                 <WhiteButton button-name="Send" variant="flat" @click="sendRequest" />
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-dialog v-model="confirmationDialog" persistent max-width="400">
-            <v-card>
-              <v-card-title>
-                <v-icon color="green-darken-3" size="64">
-                  mdi-check-circle-outline
-                </v-icon>
-                <div style="font-size: 24px; font-weight: bold;">
-                  Your request has been sent!
-                </div>
-              </v-card-title>
-              <v-card-actions style="justify-content: center;">
-                <WhiteButton button-name="OK" variant="flat" @click="confirmationDialog = false" />
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+          <div>
+            <v-dialog v-model="confirmationDialog" persistent max-width="400">
+              <v-card>
+                <v-card-title class="text-center">
+                  <v-icon color="green-darken-3" size="64">
+                    mdi-check-circle-outline
+                  </v-icon>
+                  <div style="font-size: 24px; font-weight: bold;">
+                    Your request has been sent!
+                  </div>
+                </v-card-title>
+                <v-card-actions style="justify-content: center;">
+                  <WhiteButton button-name="OK" variant="flat" @click="confirmationDialog = false" />
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </div>
         </div>
+        <p v-if="searchTerm && filteredResults.length === 0">
+          {{ noResultsText }} "{{ searchTerm }}"
+        </p>
       </v-card>
     </div>
-    <p v-if="searchTerm && filteredResults.length === 0">
-      {{ noResultsText }} "{{ searchTerm }}"
-    </p>
   </div>
 </template>
