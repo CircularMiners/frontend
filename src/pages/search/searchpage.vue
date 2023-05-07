@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const { mockData } = useCompanyMockDataStore()
 const searchTerm = ref('')
+const showResults = ref(false)
+
 const search = () => {
-  // Do nothing since `filteredResults` is already being computed based on `searchTerm`.
+  showResults.value = true
 }
 </script>
 
@@ -32,12 +32,12 @@ const search = () => {
             height="10"
             @keydown.enter="search"
           />
-          <WhiteButton button-name="Search" class="ml-4" />
+          <WhiteButton button-name="Search" class="ml-4" @click="search" />
         </v-row>
       </v-row>
 
       <!-- search results -->
-      <v-row>
+      <v-row v-if="showResults">
         <v-col cols="12">
           <SearchResults :search-term="searchTerm" :mock-data="mockData" />
         </v-col>

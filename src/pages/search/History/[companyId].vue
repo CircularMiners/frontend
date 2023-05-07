@@ -12,21 +12,27 @@ export default {
       return company.value ? company.value.companyName : ''
     })
 
-    const requests = computed(async () => {
+    // create a ref for storing the list of messages
+    const messages = ref([])
+
+    // load the messages when the component is mounted
+    const loadMessages = async () => {
       try {
         const response = await fetch(`/api/company/${props.companyId}/requests`)
         const data = await response.json()
-        return data.requests
+        messages.value = data.requests
       }
       catch (error) {
         console.error(error)
-        return []
       }
-    })
+    }
+
+    // call the loadMessages function when the component is mounted
+    loadMessages()
 
     return {
       companyName,
-      requests,
+      messages, // add the messages ref to the returned object
     }
   },
 }
@@ -50,7 +56,8 @@ export default {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="request in requests" :key="request.id">
+          <tr v-for="(request, index) in messages" :key="index">
+            <!-- use the request object to display the message details -->
             <td>{{ companyName }}</td>
             <td>{{ request.date }}</td>
             <td>{{ request.message }}</td>
