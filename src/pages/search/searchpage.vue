@@ -1,11 +1,7 @@
 <script setup lang="ts">
 const { mockData } = useCompanyMockDataStore()
 const searchTerm = ref('')
-const showResults = ref(false)
-
-const search = () => {
-  showResults.value = true
-}
+const searchButtonStatus = ref(false)
 </script>
 
 <template>
@@ -30,16 +26,16 @@ const search = () => {
             append-inner-icon="mdi-magnify"
             clearable
             height="10"
-            @keydown.enter="search"
+            @keydown.enter="searchButtonStatus"
           />
-          <WhiteButton button-name="Search" class="ml-4" @click="search" />
+          <WhiteButton button-name="Search" class="ml-4" @click="searchButtonStatus = !searchButtonStatus" />
         </v-row>
       </v-row>
 
       <!-- search results -->
-      <v-row v-if="showResults">
+      <v-row>
         <v-col cols="12">
-          <SearchResults :search-term="searchTerm" :mock-data="mockData" />
+          <SearchResults :search-button-status="searchButtonStatus" :search-term="searchTerm" :mock-data="mockData" />
         </v-col>
       </v-row>
     </v-container>

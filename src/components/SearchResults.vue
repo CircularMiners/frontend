@@ -3,6 +3,10 @@ const { mockData } = useCompanyMockDataStore()
 
 export default {
   props: {
+    searchButtonStatus: {
+      type: Boolean,
+      required: true,
+    },
     searchTerm: {
       type: String,
       required: true,
@@ -18,30 +22,40 @@ export default {
   },
   computed: {
     filteredResults() {
-      if (!this.searchTerm) {
-        return [] // return an empty object as the first value
-      }
-      else {
-        return mockData.filter((data) => {
-          return (
-            data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase())
+      if (this.searchButtonStatus === true) {
+        if (this.searchButtonStatus && !this.searchTerm) {
+          return [] // return an empty object as the first value
+        }
+        else {
+          return mockData.filter((data) => {
+            return (
+              data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase())
           || data.location.toLowerCase().includes(this.searchTerm.toLowerCase())
           || data.mineralName.toLowerCase().includes(this.searchTerm.toLowerCase())
           || data.materialName.toLowerCase().includes(this.searchTerm.toLowerCase())
-          )
-        })
+            )
+          })
+        }
+      }
+      else {
+        return []
       }
     },
     filteredResultsByCompanyId() {
-      if (!this.companyId) {
-        return []
+      if (this.searchButtonStatus === true) {
+        if (!this.companyId) {
+          return []
+        }
+        else {
+          return mockData.filter((data) => {
+            return (
+              data.id === this.companyId
+            )
+          })
+        }
       }
       else {
-        return mockData.filter((data) => {
-          return (
-            data.id === this.companyId
-          )
-        })
+        return []
       }
     },
   },
