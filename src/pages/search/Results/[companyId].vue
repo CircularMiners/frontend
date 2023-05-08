@@ -52,10 +52,6 @@ const items = computed(() => {
 
 <template>
   <div>
-    <WhiteButton
-      button-name="Export"
-      style="margin-bottom: 20px;"
-    />
     <v-card v-if="company" class="mb-6">
       <v-card-title
         style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;"

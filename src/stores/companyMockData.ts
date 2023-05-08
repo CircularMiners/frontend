@@ -8,6 +8,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
     materialName: string
     particleSize: string
     particleWeight: string
+    materialDescription: string
     mineralName: string
     percentage: string
     chemicalCode: string
@@ -25,6 +26,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       materialName: 'Quartz',
       particleSize: '10mm',
       particleWeight: '100g',
+      materialDescription: 'Material example description for testing purposes. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text.',
       mineralName: 'Silicon',
       percentage: '75%',
       chemicalCode: 'SiO2',
@@ -40,6 +42,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       materialName: 'Feldspar',
       particleSize: '20mm',
       particleWeight: '200g',
+      materialDescription: 'Material example description for testing purposes. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text.',
       mineralName: 'Aluminum silicate',
       percentage: '60%',
       chemicalCode: 'Al2SiO4',
@@ -55,6 +58,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       materialName: 'Mica',
       particleSize: '5mm',
       particleWeight: '50g',
+      materialDescription: 'Material example description for testing purposes. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text.',
       mineralName: 'Potassium aluminum silicate',
       percentage: '80%',
       chemicalCode: 'KAl2(AlSi3O10)(OH)2',
@@ -70,6 +74,7 @@ export const useCompanyMockDataStore = defineStore('mockData', () => {
       materialName: 'Kaolinite',
       particleSize: '15mm',
       particleWeight: '150g',
+      materialDescription: 'Material example description for testing purposes. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text.',
       mineralName: 'Aluminum silicate hydroxide',
       percentage: '70%',
       chemicalCode: 'Al2Si2O5(OH)4',

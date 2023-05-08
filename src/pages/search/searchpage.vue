@@ -25,7 +25,7 @@ const search = () => {
         <v-row cols="22" sm="15" md="10" class="mt-5">
           <v-text-field
             v-model="searchTerm"
-            placeholder="Search by mineral name"
+            placeholder="Search by material name"
             solo
             append-inner-icon="mdi-magnify"
             clearable

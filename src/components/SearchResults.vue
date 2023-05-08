@@ -75,7 +75,8 @@ export default {
           <p>
             <span style="padding-left: 6rem;">Material Name: {{ company.materialName }}</span><br>
             <span style="padding-left: 6rem;">Particle Size: {{ company.particleSize }}</span><br>
-            <span style="padding-left: 6rem;">Particle Weight: {{ company.particleWeight }}</span>
+            <span style="padding-left: 6rem;">Particle Weight: {{ company.particleWeight }}</span><br>
+            <span style="padding-left: 6rem;">Description: {{ company.materialDescription }}</span>
           </p>
           <p><b>Minerals:</b></p>
           <p>
