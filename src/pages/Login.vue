@@ -1,32 +1,33 @@
-<script>
+<!-- <script setup lang="ts">
 import { ref } from 'vue'
-
-export default {
-  name: 'Login',
-  setup() {
-    const email = ref('')
-    const password = ref('')
-
-    const rules = {
-      required: value => !!value || 'Required.',
-      email: (value) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        return emailRegex.test(value) || 'Invalid email address.'
-      },
-    }
-
-    function login() {
-      // TODO: Implement login functionality
-    }
-
-    return {
-      email,
-      password,
-      login,
-      rules,
-    }
+import { checkCredentials } from '~/services/login'
+const email = ref('')
+const password = ref('')
+const userType = ref('')
+// const rules = {
+//   required: value => !!value || 'Required.',
+//   email: (value) => {
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+//     return emailRegex.test(value) || 'Invalid email address.'
+//   },
+// }
+onSubmit = () => {
+  // eslint-disable-next-line no-console
+  console.log('Checking Credentials')
+  try {
+    await checkCredentials(
+      email.value,
+      password.value,
+      userType.value,
+        )
+        // eslint-disable-next-line no-console
+        console.log('Login Successful')
+      }
+      catch (error) {
+        // eslint-disable-next-line no-console
+        console.log('Error during Login. Check Credentials')
+      }
   },
-}
 </script>
 
 <template>
@@ -148,4 +149,4 @@ export default {
 .p {
   margin-bottom: 0;
 }
-</style>
+</style> -->

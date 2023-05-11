@@ -1,24 +1,45 @@
 <script>
 import { ref } from 'vue'
+import axios from 'axios'
 
 export default {
   name: 'MineRegistration',
   setup() {
-    const mineId = ref('')
+    // const mineId = ref('')
     const mineName = ref('')
     const mineLocation = ref('')
     const mineDescription = ref('')
 
-    // function register() {
-    //   // TODO: Implement registration functionality
-    // }
+    async function register() {
+      const { userId } = useUserStore()
+      const data = {
+        // mineId: mineId.value,
+        mineName: mineName.value,
+        mineLocation: mineLocation.value,
+        mineDescription: mineDescription.value,
+      }
+
+      try {
+        const response = await axios.post('/mine/addmine', data)
+        // eslint-disable-next-line no-console
+        console.log(response.data)
+        // eslint-disable-next-line no-const-assign, unused-imports/no-unused-vars
+        userId = response.data.mine_representative_id
+        // TODO: Handle successful registration
+      }
+      catch (error) {
+        console.error(error)
+        // TODO: Handle registration error
+      }
+    }
 
     return {
-      mineId,
+      // mineId,
       mineName,
       mineLocation,
       mineDescription,
-
+      userId,
+      register,
     }
   },
 }
@@ -35,9 +56,9 @@ export default {
           <v-card-text>
             <v-form @submit.prevent="register">
               <v-row>
-                <v-col cols="12" md="6">
+                <!-- <v-col cols="12" md="6">
                   <v-text-field v-model="mineId" label="Mine ID" class="registration-text-field" />
-                </v-col>
+                </v-col> -->
                 <v-col cols="12" md="6">
                   <v-text-field v-model="mineName" label="Mine Name" class="registration-text-field" />
                 </v-col>
@@ -53,7 +74,7 @@ export default {
             </v-form>
             <div class="registration-separator">
               <router-link to="/MineRepresentative">
-                <v-btn color="#1C658C" text class="registration-btn">
+                <v-btn color="#1C658C" text class="registration-btn" @click="register">
                   Register
                 </v-btn>
               </router-link>
