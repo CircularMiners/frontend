@@ -1,104 +1,50 @@
-<script>
-const { mockData } = useCompanyMockDataStore()
+<script setup lang="ts">
+const props = defineProps({
+  searchTerm: {
+    type: String,
+    required: true,
+    default: '',
+  },
+  filteredResults: {
+    type: Array,
+    required: true,
+  },
+})
+const router = useRouter()
+const dialog = ref(false)
+const confirmationDialog = ref(false)
+const requestMessage = ref('')
 
-export default {
-  props: {
-    searchButtonStatus: {
-      type: Boolean,
-      required: true,
-    },
-    searchTerm: {
-      type: String,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      noResultsText: 'No results found for',
-      dialog: false,
-      confirmationDialog: false,
-      requestMessage: '',
-    }
-  },
-  computed: {
-    filteredResults() {
-      if (this.searchButtonStatus === true) {
-        if (this.searchButtonStatus && !this.searchTerm) {
-          return [] // return an empty object as the first value
-        }
-        else {
-          return mockData.filter((data) => {
-            return (
-              data.companyName.toLowerCase().includes(this.searchTerm.toLowerCase())
-          || data.location.toLowerCase().includes(this.searchTerm.toLowerCase())
-          || data.mineralName.toLowerCase().includes(this.searchTerm.toLowerCase())
-          || data.materialName.toLowerCase().includes(this.searchTerm.toLowerCase())
-            )
-          })
-        }
-      }
-      else {
-        return []
-      }
-    },
-    filteredResultsByCompanyId() {
-      if (this.searchButtonStatus === true) {
-        if (!this.companyId) {
-          return []
-        }
-        else {
-          return mockData.filter((data) => {
-            return (
-              data.id === this.companyId
-            )
-          })
-        }
-      }
-      else {
-        return []
-      }
-    },
-  },
-  methods: {
-    openAccessPage(companyId) {
-      this.$router.push({ path: `Results/${companyId}`, params: { company: companyId } })
-    },
-    openDialog(companyId) {
-      this.requestCompany = useCompanyMockDataStore().mockData.find(data => data.id === companyId)
-      this.dialog = true
-      this.confirmationDialog = false
-    },
-    sendRequest() {
-      // implement sending request
-      this.dialog = false
-      this.confirmationDialog = true
-    },
-  },
+// console.log('formSearchResult'+props.filteredResults)
+
+const openAccessPage = function (companyId: number): void {
+  router.push({ path: `Results/${companyId}`, params: { company: companyId } })
+}
+const openDialog = function (companyId: number): void {
+  requestCompany = useCompanyMockDataStore().mockData.find(data => data.id === companyId)
+  dialog.value = true
+  confirmationDialog.value = false
+}
+const sendRequest = function (): void {
+  dialog.value = false
+  confirmationDialog.value = true
 }
 </script>
 
 <template>
   <div>
-    <div v-if="filteredResults.length > 0">
-      <v-card v-for="(company, index) in filteredResults" :key="index" mb="6">
+    <div v-if="props.filteredResults.length > 0">
+      <v-card v-for="(company, index) in props.filteredResults" :key="index" mb="6">
         <v-card-title>{{ company.companyName }} </v-card-title>
         <v-card-text>
-          <p><b>Company Name:</b> {{ company.companyName }}</p>
-          <p><b>Location:</b> {{ company.location }}</p>
+          <p><b>Mine Name:</b> {{ company.mineName }}</p>
+          <p><b>Mine Location:</b> {{ company.mineLocation }}</p>
           <p><b>Material:</b></p>
           <p>
-            <span style="padding-left: 6rem;">Material Name: {{ company.materialName }}</span><br>
-            <span style="padding-left: 6rem;">Particle Size: {{ company.particleSize }}</span><br>
-            <span style="padding-left: 6rem;">Particle Weight: {{ company.particleWeight }}</span><br>
-            <span style="padding-left: 6rem;">Description: {{ company.materialDescription }}</span>
-          </p>
-          <p><b>Minerals:</b></p>
-          <p>
-            <span style="padding-left: 6rem;">Mineral Name: {{ company.mineralName }}</span><br>
-            <span style="padding-left: 6rem;">Percentage: {{ company.percentage }}</span><br>
-            <span style="padding-left: 6rem;">Chemical Code: {{ company.chemicalCode }}</span><br>
-            <span style="padding-left: 6rem;">Purity %: {{ company.purity }}</span><br>
-            <span style="padding-left: 6rem;">Moisture %: {{ company.moisture }}</span>
+            <span style="padding-left: 6rem;">Material Name: {{ company.meterialName }}</span><br>
+            <span style="padding-left: 6rem;">Material Size: {{ company.size }}</span><br>
+            <span style="padding-left: 6rem;">Material Weight: {{ company.weight }}</span><br>
+            <span style="padding-left: 6rem;">MaterialDescription: {{ company.meterialDescription }}</span>
           </p>
         </v-card-text>
         <v-layout justify-end align-start mb="3" mr="3">
@@ -135,16 +81,11 @@ export default {
               </div>
             </v-card-title>
             <v-card-actions style="justify-content: center;">
-              <WhiteButton
-                v-card-actions button-name="OK" variant="flat" @click="confirmationDialog = false"
-              />
+              <WhiteButton button-name="OK" variant="flat" @click="confirmationDialog = false" />
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-card>
     </div>
-    <p v-if="searchTerm && filteredResults.length === 0">
-      {{ noResultsText }} "{{ searchTerm }}"
-    </p>
   </div>
 </template>
