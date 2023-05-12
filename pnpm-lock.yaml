@@ -20,8 +20,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   pinia:
-    specifier: ^2.0.33
-    version: 2.0.33(typescript@4.9.5)(vue@3.2.47)
+    specifier: ^2.0.36
+    version: 2.0.36(typescript@4.9.5)(vue@3.2.47)
   vite-plugin-vuetify:
     specifier: ^1.0.2
     version: 1.0.2(vite@4.2.1)(vue@3.2.47)(vuetify@3.1.13)
@@ -34,6 +34,12 @@ dependencies:
   vue-i18n:
     specifier: ^9.2.2
     version: 9.2.2(vue@3.2.47)
+  vue-marquee-text-component:
+    specifier: ^2.0.1
+    version: 2.0.1
+  vue-responsive-video-background-player:
+    specifier: ^2.3.1
+    version: 2.3.1
   vue-router:
     specifier: ^4.1.6
     version: 4.1.6(vue@3.2.47)
@@ -4068,6 +4074,11 @@ packages:
       semver: 7.0.0
     dev: true
 
+  /core-js@3.30.2:
+    resolution: {integrity: sha512-uBJiDmwqsbJCWHAwjrx3cvjbMXP7xD72Dmsn5LOJpiRmE3WbBbN5rCqQ2Qh6Ek6/eOrjlWngEynBWo4VxerQhg==}
+    requiresBuild: true
+    dev: false
+
   /core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
     dev: true
@@ -7777,8 +7788,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /pinia@2.0.33(typescript@4.9.5)(vue@3.2.47):
-    resolution: {integrity: sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==}
+  /pinia@2.0.36(typescript@4.9.5)(vue@3.2.47):
+    resolution: {integrity: sha512-4UKApwjlmJH+VuHKgA+zQMddcCb3ezYnyewQ9NVrsDqZ/j9dMv5+rh+1r48whKNdpFkZAWVxhBp5ewYaYX9JcQ==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
@@ -9811,6 +9822,17 @@ packages:
       '@intlify/vue-devtools': 9.2.2
       '@vue/devtools-api': 6.5.0
       vue: 3.2.47
+
+  /vue-marquee-text-component@2.0.1:
+    resolution: {integrity: sha512-dbeRwDY5neOJcWZrDFU2tJMhPSsxN25ZpNYeZdt0jkseg1MbyGKzrfEH9nrCFZRkEfqhxG+ukyzwVwR9US5sTQ==}
+    dependencies:
+      core-js: 3.30.2
+      vue: 3.2.47
+    dev: false
+
+  /vue-responsive-video-background-player@2.3.1:
+    resolution: {integrity: sha512-9IdFfmHe1cY0PvTw51sYcSO5+gPJya5einLIoktVzBMALEC3yok36X/1+hDfbgihapRYxz3fmyv1o5M1u+0xEA==}
+    dev: false
 
   /vue-router@4.1.6(vue@3.2.47):
     resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==}

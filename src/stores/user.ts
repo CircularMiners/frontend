@@ -1,34 +1,53 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user', () => {
-  /**
-   * Current name of the user.
-   */
-  const savedName = ref('')
-  const previousNames = ref(new Set<string>())
-  const userId = ref('')
-  const usedNames = computed(() => Array.from(previousNames.value))
-  const otherNames = computed(() => usedNames.value.filter(name => name !== savedName.value))
+export const useUserStore = defineStore('user', {
+  state: () => ({
+    user: null,
+  }),
 
-  /**
-   * Changes the current name of the user and saves the one that was used
-   * before.
-   *
-   * @param name - new name to set
-   */
-  function setNewName(name: string) {
-    if (savedName.value)
-      previousNames.value.add(savedName.value)
+  actions: {
+    // async fetchUser() {
+    //   const res = await fetch("https://localhost:3000/user");
 
-    savedName.value = name
-  }
-
-  return {
-    userId,
-    setNewName,
-    otherNames,
-    savedName,
-  }
+    //   const user = await res.json();
+    //   this.user = user;
+    // },
+    async registerRepresentative(name: string, email: string, password: string, companyName: string, phoneNumber: string) {
+      const formData = {
+        mineRepresentativeName: name,
+        mineRepresentativeEmail: email,
+        mineRepresentativePassword: password,
+        mineRepresentativeCompanyname: companyName,
+        mineRepresentativePhonenumber: phoneNumber,
+      }
+      const res = await fetch('http://localhost:5002/registration/minerepresentative', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      const user = await res.json()
+      this.user = user
+    },
+    async registerVendor(name: string, email: string, password: string, companyName: string) {
+      const formData = {
+        dataRequestorName: name,
+        dataRequestorEmail: email,
+        dataRequestorPassword: password,
+        dataRequestorCompanyname: companyName,
+      }
+      const res = await fetch('http://localhost:5002/registration/datarequestor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      const user = await res.json()
+      this.user = user
+    },
+  },
 })
 
 if (import.meta.hot)
