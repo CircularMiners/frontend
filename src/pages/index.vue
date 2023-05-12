@@ -1,41 +1,11 @@
 <script setup lang="ts">
 import MarqueeText from 'vue-marquee-text-component'
 import VideoBackground from 'vue-responsive-video-background-player'
-import RegistrationRepresentatives from './RegistrationRepresentatives.vue'
-import RegistrationVendors from './RegistrationVendors.vue'
 const stringRegisterType = ref('')
 
 const changeRegisterType = (registerType: string) => {
   stringRegisterType.value = registerType
 }
-// import { checkCredentials } from '~/services/login'
-// const email = ref('')
-// const password = ref('')
-// const userType = ref('')
-// const rules = {
-//   required: value => !!value || 'Required.',
-//   email: (value) => {
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-//     return emailRegex.test(value) || 'Invalid email address.'
-//   },
-// }
-// onSubmit = () => {
-//   // eslint-disable-next-line no-console
-//   console.log('Checking Credentials')
-//   try {
-//     await checkCredentials(
-//       email.value,
-//       password.value,
-//       userType.value,
-//         )
-//         // eslint-disable-next-line no-console
-//         console.log('Login Successful')
-//       }
-//       catch (error) {
-//         // eslint-disable-next-line no-console
-//         console.log('Error during Login. Check Credentials')
-//       }
-//   },
 </script>
 
 <template>
@@ -64,26 +34,10 @@ const changeRegisterType = (registerType: string) => {
             </h5>
           </v-card-title>
           <v-card-text>
-            <v-form v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'">
-              <v-radio-group
-                inline
-              >
-                <v-radio
-                  label="Representative"
-                  value="radio-1"
-                />
-                <v-radio
-                  label="Vendor"
-                  value="radio-2"
-                />
-              </v-radio-group>
-              <v-text-field label="Email" placeholder="Your email" outlined />
-              <v-text-field label="Password" placeholder="Your password" type="password" outlined />
-              <v-btn type="submit" color="#1C658C" class="mt-4" block>
-                <span class="text-white">
-                  Login
-                </span>
-              </v-btn>
+            <TheLogin v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'" />
+            <TheRegistrationRepresentatives v-else-if="stringRegisterType === 'representative'" />
+            <TheRegistrationVendors v-else-if="stringRegisterType === 'vendor'" />
+            <div v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'">
               <p class="text-body-1 mt-10">
                 Don't have an account? Register now.
               </p>
@@ -103,9 +57,7 @@ const changeRegisterType = (registerType: string) => {
                   </v-btn>
                 </v-col>
               </v-row>
-            </v-form>
-            <RegistrationRepresentatives v-else-if="stringRegisterType === 'representative'" />
-            <RegistrationVendors v-else-if="stringRegisterType === 'vendor'" />
+            </div>
             <v-divider class="my-4" />
           </v-card-text>
         </v-card>

@@ -6,12 +6,25 @@ export const useUserStore = defineStore('user', {
   }),
 
   actions: {
-    // async fetchUser() {
-    //   const res = await fetch("https://localhost:3000/user");
-
-    //   const user = await res.json();
-    //   this.user = user;
-    // },
+    async checkCredentials(email: string, password: string, user_type: string) {
+      const formData = {
+        userEmail: email,
+        userPassword: password,
+        userType: user_type,
+      }
+      const res = await fetch('http://localhost:5002/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      const user = await res.json()
+      this.user = user
+      if (this.user)
+        // eslint-disable-next-line no-console
+        console.log('Credentials submitted successfully')
+    },
     async registerRepresentative(name: string, email: string, password: string, companyName: string, phoneNumber: string) {
       const formData = {
         mineRepresentativeName: name,
