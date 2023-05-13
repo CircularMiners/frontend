@@ -6,7 +6,7 @@ const userStore = useUserStore()
 const formData = {
   email: ref(''),
   password: ref(''),
-  userType: ref('representative'),
+  userType: ref(''),
 }
 // const rules = {
 //   required: value => !!value || 'Required.',
@@ -24,8 +24,9 @@ const onSubmit = async () => {
       formData.password.value,
       formData.userType.value,
     )
+    // TODO::route to next page after login
     // eslint-disable-next-line no-console
-    console.log('Login Successful')
+    console.log(userStore.user.id)
   }
   catch (error) {
     // eslint-disable-next-line no-console
@@ -46,7 +47,7 @@ const onSubmit = async () => {
       />
       <v-radio
         label="Vendor"
-        value="vendor"
+        value="requestor"
       />
     </v-radio-group>
     <v-text-field v-model="formData.email.value" label="Email" placeholder="Your email" outlined />
