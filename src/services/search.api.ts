@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { companySideStreamData } from '~/interfaces/companySideStreamData.interface'
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:5002/sidestream',
+  baseURL: 'https://urchin-app-q36en.ondigitalocean.app/backend2/sidestream',
 })
 
 export async function searchBaseOnMaterialName(oreName: string) {
