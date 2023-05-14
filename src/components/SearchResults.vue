@@ -17,15 +17,15 @@ const router = useRouter()
 const dialog = ref(false)
 const confirmationDialog = ref(false)
 const requestMessage = ref('')
-let requestCompany: any
+let requestSideStream: any
 
 // console.log('formSearchResult'+props.filteredResults)
 
-const openAccessPage = function (companyId: number): void {
-  router.push({ path: `Results/${companyId}`, params: { company: companyId } })
+const openAccessPage = function (sideStreamId: string): void {
+  router.push({ path: `Results/${sideStreamId}`, params: { sideStream: sideStreamId } })
 }
-const openDialog = function (companyId: number): void {
-  requestCompany = props.filteredResults.find((data: any) => data.id === companyId)
+const openDialog = function (sideStreamId: string): void {
+  requestSideStream = props.filteredResults.find((data: any) => data.id === sideStreamId)
   dialog.value = true
   confirmationDialog.value = false
 }
@@ -34,7 +34,7 @@ const sendRequest = async function (): Promise<void> {
 
   const requestData: requestData = {
     dataRequestorId: '21734667-7a32-45f4-97aa-accffc62066d', // Replace with function to get ID
-    sideStreamId: requestCompany.id,
+    sideStreamId: requestSideStream.id,
     requestAccessMessage: requestMessage.value,
   }
   try {
@@ -51,28 +51,28 @@ const sendRequest = async function (): Promise<void> {
 <template>
   <div>
     <div v-if="props.filteredResults.length > 0">
-      <v-card v-for="(company, index) in props.filteredResults" :key="index" mb="6">
-        <v-card-title>{{ company.companyName }} </v-card-title>
+      <v-card v-for="(sideStream, index) in props.filteredResults" :key="index" mb="6">
+        <v-card-title>{{ sideStream.companyName }} </v-card-title>
         <v-card-text>
-          <p><b>Mine Name:</b> {{ company.mineName }}</p>
-          <p><b>Mine Location:</b> {{ company.mineLocation }}</p>
+          <p><b>Mine Name:</b> {{ sideStream.mineName }}</p>
+          <p><b>Mine Location:</b> {{ sideStream.mineLocation }}</p>
           <p><b>Material:</b></p>
           <p>
-            <span style="padding-left: 6rem;">Material Name: {{ company.meterialName }}</span><br>
-            <span style="padding-left: 6rem;">Material Size: {{ company.size }}</span><br>
-            <span style="padding-left: 6rem;">Material Weight: {{ company.weight }}</span><br>
-            <span style="padding-left: 6rem;">MaterialDescription: {{ company.meterialDescription }}</span>
+            <span style="padding-left: 6rem;">Material Name: {{ sideStream.meterialName }}</span><br>
+            <span style="padding-left: 6rem;">Material Size: {{ sideStream.size }}</span><br>
+            <span style="padding-left: 6rem;">Material Weight: {{ sideStream.weight }}</span><br>
+            <span style="padding-left: 6rem;">MaterialDescription: {{ sideStream.meterialDescription }}</span>
           </p>
         </v-card-text>
         <v-layout justify-end align-start mb="3" mr="3">
-          <v-btn :color="company.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="company.access ? openAccessPage(company.id) : openDialog(company.id)">
-            {{ company.access ? 'Open Access' : 'Request Access' }}
+          <v-btn :color="sideStream.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="sideStream.access ? openAccessPage(sideStream.id) : openDialog(sideStream.id)">
+            {{ sideStream.access ? 'Open Access' : 'Request Access' }}
           </v-btn>
         </v-layout>
         <v-dialog v-model="dialog" persistent width="auto">
           <v-card>
             <v-card-title style="text-align:center; font-weight:bold; font-size:x-large; margin-top: 20px;">
-              Request access for {{ requestCompany.companyName }}
+              Request access for {{ requestSideStream.companyName }}
             </v-card-title>
             <v-card-text>
               Write a message to the company. The request will be added to your request history.
