@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { requestData } from '~/interfaces/requestData.interface'
+import { sendAccessRequest } from '~/services/request.api.ts'
+
 const props = defineProps({
   searchTerm: {
     type: String,
@@ -14,6 +17,7 @@ const router = useRouter()
 const dialog = ref(false)
 const confirmationDialog = ref(false)
 const requestMessage = ref('')
+let requestCompany: any
 
 // console.log('formSearchResult'+props.filteredResults)
 
@@ -21,13 +25,26 @@ const openAccessPage = function (companyId: number): void {
   router.push({ path: `Results/${companyId}`, params: { company: companyId } })
 }
 const openDialog = function (companyId: number): void {
-  requestCompany = useCompanyMockDataStore().mockData.find(data => data.id === companyId)
+  requestCompany = props.filteredResults.find((data: any) => data.id === companyId)
   dialog.value = true
   confirmationDialog.value = false
 }
-const sendRequest = function (): void {
+const sendRequest = async function (): Promise<void> {
   dialog.value = false
-  confirmationDialog.value = true
+
+  const requestData: requestData = {
+    dataRequestorId: '21734667-7a32-45f4-97aa-accffc62066d', // Replace with function to get ID
+    sideStreamId: requestCompany.id,
+    requestAccessMessage: requestMessage.value,
+  }
+  try {
+    await sendAccessRequest(requestData)
+    confirmationDialog.value = true
+  }
+  catch (err) {
+    console.error(err)
+    // Handle error
+  }
 }
 </script>
 
