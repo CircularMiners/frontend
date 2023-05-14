@@ -16,7 +16,7 @@ const props = defineProps({
 const router = useRouter()
 const dialog = ref(false)
 const confirmationDialog = ref(false)
-const requestMessage = ref('')
+const requestAccessMessage = ref('')
 let requestSideStream: any
 
 // console.log('formSearchResult'+props.filteredResults)
@@ -25,7 +25,7 @@ const openAccessPage = function (sideStreamId: string): void {
   router.push({ path: `Results/${sideStreamId}`, params: { sideStream: sideStreamId } })
 }
 const openDialog = function (sideStreamId: string): void {
-  requestSideStream = props.filteredResults.find((data: any) => data.id === sideStreamId)
+  requestSideStream = props.filteredResults.find((companySideStreamData: any) => companySideStreamData.id === sideStreamId)
   dialog.value = true
   confirmationDialog.value = false
 }
@@ -35,7 +35,7 @@ const sendRequest = async function (): Promise<void> {
   const requestData: requestData = {
     dataRequestorId: '21734667-7a32-45f4-97aa-accffc62066d', // Replace with function to get ID
     sideStreamId: requestSideStream.id,
-    requestAccessMessage: requestMessage.value,
+    requestAccessMessage: requestAccessMessage.value,
   }
   try {
     await sendAccessRequest(requestData)
@@ -78,7 +78,7 @@ const sendRequest = async function (): Promise<void> {
               Write a message to the company. The request will be added to your request history.
             </v-card-text>
             <v-col cols="12">
-              <v-textarea v-model="requestMessage" label="Message" required />
+              <v-textarea v-model="requestAccessMessage" label="Message" required />
             </v-col>
             <v-card-actions style="justify-content: center;">
               <WhiteButton button-name="Cancel" variant="text" @click="dialog = false" />
