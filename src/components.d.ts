@@ -9,11 +9,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AccessOverlay: typeof import('./components/AccessOverlay.vue')['default']
+    Overlay: typeof import('./components/overlay.vue')['default']
+    OverlayForm: typeof import('./components/OverlayForm.vue')['default']
     README: typeof import('./components/README.md')['default']
-    RegistrationRepresentatives: typeof import('./components/RegistrationRepresentatives.vue')['default']
-    RegistrationVendors: typeof import('./components/RegistrationVendors.vue')['default']
+    ResultPage: typeof import('./components/ResultPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchResult: typeof import('./components/SearchResult.vue')['default']
+    SearchResults: typeof import('./components/SearchResults.vue')['default']
     Tester: typeof import('./components/Tester.vue')['default']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
@@ -21,5 +25,6 @@ declare module '@vue/runtime-core' {
     TheLogin: typeof import('./components/TheLogin.vue')['default']
     TheRegistrationRepresentatives: typeof import('./components/TheRegistrationRepresentatives.vue')['default']
     TheRegistrationVendors: typeof import('./components/TheRegistrationVendors.vue')['default']
+    WhiteButton: typeof import('./components/WhiteButton.vue')['default']
   }
 }

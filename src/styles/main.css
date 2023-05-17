@@ -1,4 +1,4 @@
-@import './markdown.css';
+@import "./markdown.css";
 
 html,
 body,
@@ -18,7 +18,7 @@ html.dark {
 }
 
 #nprogress .bar {
-  background: rgb(13,148,136);
+  background: rgb(13, 148, 136);
   opacity: 0.75;
   position: fixed;
   z-index: 1031;
@@ -26,4 +26,8 @@ html.dark {
   left: 0;
   width: 100%;
   height: 2px;
+}
+
+.v-input__icon.v-input__icon--clear:before {
+  opacity: 1;
 }
