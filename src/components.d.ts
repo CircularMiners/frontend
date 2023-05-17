@@ -13,8 +13,6 @@ declare module '@vue/runtime-core' {
     Overlay: typeof import('./components/overlay.vue')['default']
     OverlayForm: typeof import('./components/OverlayForm.vue')['default']
     README: typeof import('./components/README.md')['default']
-    RegistrationRepresentatives: typeof import('./components/RegistrationRepresentatives.vue')['default']
-    RegistrationVendors: typeof import('./components/RegistrationVendors.vue')['default']
     ResultPage: typeof import('./components/ResultPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
