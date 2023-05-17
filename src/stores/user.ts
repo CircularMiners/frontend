@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
         userPassword: password,
         userType: user_type,
       }
-      const res = await fetch('http://localhost:5002/login', {
+      const res = await fetch('https://urchin-app-q36en.ondigitalocean.app/backend2/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
         mineRepresentativeCompanyname: companyName,
         mineRepresentativePhonenumber: phoneNumber,
       }
-      const res = await fetch('http://localhost:5002/registration/minerepresentative', {
+      const res = await fetch('https://urchin-app-q36en.ondigitalocean.app/backend2/registration/minerepresentative', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const useUserStore = defineStore('user', {
         dataRequestorPassword: password,
         dataRequestorCompanyname: companyName,
       }
-      const res = await fetch('http://localhost:5002/registration/datarequestor', {
+      const res = await fetch('https://urchin-app-q36en.ondigitalocean.app/backend2/registration/datarequestor', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

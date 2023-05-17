@@ -30,7 +30,7 @@ const changeRegisterType = (registerType: string) => {
               Register as a Representative
             </h5>
             <h5 v-else-if="stringRegisterType === 'vendor'" class="mb-0 text-h5">
-              Register as a Vendor
+              Register as a Data Requestor
             </h5>
           </v-card-title>
           <v-card-text>
@@ -52,7 +52,7 @@ const changeRegisterType = (registerType: string) => {
                 <v-col>
                   <v-btn color="#1C658C" class="mt-4" block @click="changeRegisterType('vendor')">
                     <span class="text-white">
-                      Vendor
+                      Data Requestor
                     </span>
                   </v-btn>
                 </v-col>
@@ -63,7 +63,7 @@ const changeRegisterType = (registerType: string) => {
         </v-card>
       </v-col>
     </v-container>
-    <MarqueeText :duration="30" class="marquee-text-position">
+    <MarqueeText :duration="60" class="marquee-text-position">
       MineMatch is a platform designed to promote a greener and more sustainable mining industry by providing a marketplace for the sale of mine side stream and tailings to potential buyers. By connecting mining companies with interested parties, MineMatch facilitates the reduction of waste and promotes the circular economy by enabling the reuse of materials that might otherwise be discarded. Our goal is to make the mining industry more sustainable while simultaneously supporting businesses and communities that rely on it.
     </MarqueeText>
   </VideoBackground>

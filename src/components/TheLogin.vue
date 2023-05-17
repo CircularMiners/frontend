@@ -46,7 +46,7 @@ const onSubmit = async () => {
         value="representative"
       />
       <v-radio
-        label="Vendor"
+        label="Data Requestor"
         value="requestor"
       />
     </v-radio-group>
