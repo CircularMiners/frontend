@@ -14,6 +14,8 @@ declare module '@vue/runtime-core' {
     OverlayForm: typeof import('./components/OverlayForm.vue')['default']
     README: typeof import('./components/README.md')['default']
     ResultPage: typeof import('./components/ResultPage.vue')['default']
+    RegistrationRepresentatives: typeof import('./components/RegistrationRepresentatives.vue')['default']
+    RegistrationVendors: typeof import('./components/RegistrationVendors.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchResult: typeof import('./components/SearchResult.vue')['default']
@@ -23,5 +25,8 @@ declare module '@vue/runtime-core' {
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
     WhiteButton: typeof import('./components/WhiteButton.vue')['default']
+    TheLogin: typeof import('./components/TheLogin.vue')['default']
+    TheRegistrationRepresentatives: typeof import('./components/TheRegistrationRepresentatives.vue')['default']
+    TheRegistrationVendors: typeof import('./components/TheRegistrationVendors.vue')['default']
   }
 }
