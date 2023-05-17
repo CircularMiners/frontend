@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { searchBaseOnMaterialName } from '~/services/search.api.ts'
 import type { companySideStreamData } from '~/interfaces/companySideStreamData.interface'
+
 const searchTerm: String = ref('')
 const noResultsText = ref('No results found for')
 let filterResults: companySideStreamData[] = []

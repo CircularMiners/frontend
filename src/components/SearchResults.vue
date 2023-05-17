@@ -25,6 +25,7 @@ const openAccessPage = function (sideStreamId: string): void {
   router.push({ path: `Results/${sideStreamId}`, params: { sideStream: sideStreamId } })
 }
 const openDialog = function (sideStreamId: string): void {
+  // console.log(sideStreamId)
   requestSideStream = props.filteredResults.find((data: any) => data.id === sideStreamId)
   dialog.value = true
   confirmationDialog.value = false
@@ -36,6 +37,7 @@ const sendRequest = async function (): Promise<void> {
     dataRequestorId: '21734667-7a32-45f4-97aa-accffc62066d', // Replace with function to get ID
     sideStreamId: requestSideStream.id,
     requestAccessMessage: requestMessage.value,
+
   }
   try {
     await sendAccessRequest(requestData)
