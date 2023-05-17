@@ -7,6 +7,4 @@
       <router-view />
     </v-container>
   </v-main>
-
-  <v-footer app />
 </template>
