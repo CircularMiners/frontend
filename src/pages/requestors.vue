@@ -7,12 +7,18 @@ const axiosClient = axios.create({
 })
 
 interface RequestData {
+  dataRequestorId: string
   dataRequestorName: string
   dataRequestorEmail: string
   dataRequestorCompanyName: string
   requestAccessMessage: string
   requestAccessDatetime: string
   requestAccessStatus: string
+}
+
+function formatDate(date) {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+  return new Date(date).toLocaleDateString(undefined, options)
 }
 
 const pendingRequests = ref<RequestData[]>([])
@@ -54,15 +60,6 @@ function cancelRequest() {
   // Handle request cancellation logic here
   detailsDialog.value = false
 }
-
-function getStatusColor(status: string) {
-  if (status === 'PENDING')
-    return 'yellow'
-  else if (status === 'APPROVED')
-    return 'green'
-  else
-    return 'red'
-}
 </script>
 
 <template>
@@ -72,33 +69,35 @@ function getStatusColor(status: string) {
         Pending Requests
       </v-card-title>
       <v-table>
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Company Name</th>
-          <th>Message</th>
-          <th>Date</th>
-          <th>Details</th>
-        </tr>
-        <template v-for="request in pendingRequests" :key="request.dataRequestorId">
+        <thead>
           <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Company Name</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="request in pendingRequests" :key="request.dataRequestorId" style="margin-bottom: 10px;">
             <td>{{ request.dataRequestorName }}</td>
             <td>{{ request.dataRequestorEmail }}</td>
             <td>{{ request.dataRequestorCompanyName }}</td>
             <td>{{ request.requestAccessMessage }}</td>
-            <td>{{ request.requestAccessDatetime }}</td>
+            <td>{{ formatDate(request.requestAccessDatetime) }}</td>
             <td>
               <v-btn
-                :color="getStatusColor(request.requestAccessStatus)"
+                color="blue"
+                variant="tonal" class="text-subtitle-2"
                 outlined
-                :disabled="request.requestAccessStatus !== 'PENDING'"
                 @click="showDetailsDialog(request)"
               >
                 Details
               </v-btn>
             </td>
           </tr>
-        </template>
+        </tbody>
       </v-table>
     </v-card>
 
@@ -107,31 +106,41 @@ function getStatusColor(status: string) {
         History
       </v-card-title>
       <v-table>
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Company Name</th>
-          <th>Message</th>
-          <th>Date</th>
-          <th>Status</th>
-        </tr>
-        <template v-for="request in historyRequests" :key="request.dataRequestorId">
+        <thead>
           <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Company Name</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="request in historyRequests" :key="request.dataRequestorId" style="margin-bottom: 10px;">
             <td>{{ request.dataRequestorName }}</td>
             <td>{{ request.dataRequestorEmail }}</td>
             <td>{{ request.dataRequestorCompanyName }}</td>
             <td>{{ request.requestAccessMessage }}</td>
-            <td>{{ request.requestAccessDatetime }}</td>
+            <td>{{ formatDate(request.requestAccessDatetime) }}</td>
             <td>{{ request.requestAccessStatus }}</td>
           </tr>
-        </template>
+        </tbody>
       </v-table>
     </v-card>
 
     <!-- Details dialog -->
     <v-dialog v-model="detailsDialog" max-width="500px">
       <v-card>
-        <v-card-title>Request Details</v-card-title>
+        <v-card-actions class="pa-3">
+          <v-spacer />
+          <v-btn icon @click="cancelRequest">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-card-title style="text-align:center;">
+          Request Details
+        </v-card-title>
         <v-card-text>
           <!-- Display request details here -->
           <div v-if="selectedRequest">
@@ -143,15 +152,13 @@ function getStatusColor(status: string) {
             <p><strong>Status:</strong> {{ selectedRequest.requestAccessStatus }}</p>
           </div>
         </v-card-text>
-        <v-card-actions>
-          <v-btn color="green" @click="approveRequest">
+        <v-card-actions justify-center>
+          <v-btn variant="tonal" class="text-subtitle-2" color="green" outlined @click="approveRequest">
             Approve
           </v-btn>
-          <v-btn color="red" @click="denyRequest">
+          <v-spacer />
+          <v-btn variant="tonal" class="text-subtitle-2" color="red" @click="denyRequest">
             Deny
-          </v-btn>
-          <v-btn color="blue" @click="cancelRequest">
-            Cancel
           </v-btn>
         </v-card-actions>
       </v-card>
