@@ -148,7 +148,7 @@ function cancelRequest() {
             <p><strong>Email:</strong> {{ selectedRequest.dataRequestorEmail }}</p>
             <p><strong>Company Name:</strong> {{ selectedRequest.dataRequestorCompanyName }}</p>
             <p><strong>Message:</strong> {{ selectedRequest.requestAccessMessage }}</p>
-            <p><strong>Date:</strong> {{ selectedRequest.requestAccessDatetime }}</p>
+            <p><strong>Date:</strong> {{ formatDate (selectedRequest.requestAccessDatetime) }}</p>
             <p><strong>Status:</strong> {{ selectedRequest.requestAccessStatus }}</p>
           </div>
         </v-card-text>
