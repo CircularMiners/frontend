@@ -14,9 +14,10 @@ interface RequestData {
   requestAccessMessage: string
   requestAccessDatetime: string
   requestAccessStatus: string
+  sidestreamId: string
 }
 
-function formatDate(date) {
+function formatDate(date: string): string {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
   return new Date(date).toLocaleDateString(undefined, options)
 }
@@ -25,39 +26,71 @@ const pendingRequests = ref<RequestData[]>([])
 const historyRequests = ref<RequestData[]>([])
 const detailsDialog = ref(false)
 const selectedRequest = ref<RequestData | null>(null)
+const mineRepId = '1782bc72-7188-453f-acac-f3f0c73f2c35' // Replace with your actual mineRepId
 
 onMounted(() => {
-  fetchRequests()
+  fetchRequests(mineRepId)
 })
 
-function showDetailsDialog(request: any) {
+function showDetailsDialog(request: RequestData) {
   selectedRequest.value = request
   detailsDialog.value = true
 }
 
-async function fetchRequests() {
+async function fetchRequests(mineRepId: string) {
   try {
-    const response = await axiosClient.get<RequestData[]>('/requestaccess/miner/1782bc72-7188-453f-acac-f3f0c73f2c35')
+    const response = await axiosClient.get<RequestData[]>(`/requestaccess/miner/${mineRepId}`)
     pendingRequests.value = response.data.filter(request => request.requestAccessStatus === 'PENDING')
     historyRequests.value = response.data.filter(request => request.requestAccessStatus !== 'PENDING')
   }
   catch (error) {
-    console.error('Failed to fetch requests:', error)
+    console.error(error)
   }
 }
 
-function approveRequest() {
-  // Handle request approval logic here
-  detailsDialog.value = false
+async function approveRequest() {
+  const selectedRequestValue = selectedRequest.value
+  if (selectedRequestValue) {
+    const { dataRequestorId, sidestreamId } = selectedRequestValue
+    const payload = {
+      dataRequestorId,
+      requestAccessStatus: 'APPROVED',
+      sidestreamId,
+    }
+
+    try {
+      await axiosClient.put(`/requestaccess/${mineRepId}`, payload)
+      detailsDialog.value = false
+      // Perform any additional actions after request approval
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
 }
 
-function denyRequest() {
-  // Handle request denial logic here
-  detailsDialog.value = false
+async function denyRequest() {
+  const selectedRequestValue = selectedRequest.value
+  if (selectedRequestValue) {
+    const { dataRequestorId, sidestreamId } = selectedRequestValue
+    const payload = {
+      dataRequestorId,
+      requestAccessStatus: 'DENIED',
+      sidestreamId,
+    }
+
+    try {
+      await axiosClient.put(`/requestaccess/${mineRepId}`, payload)
+      detailsDialog.value = false
+      // Perform any additional actions after request denial
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
 }
 
 function cancelRequest() {
-  // Handle request cancellation logic here
   detailsDialog.value = false
 }
 </script>
@@ -103,7 +136,7 @@ function cancelRequest() {
 
     <v-card>
       <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
-        History
+        History of requests
       </v-card-title>
       <v-table>
         <thead>
