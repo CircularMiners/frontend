@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import axios from 'axios'
-import { useRouter } from 'vue-router'
 
 const axiosClient = axios.create({
   baseURL: 'https://urchin-app-q36en.ondigitalocean.app/backend2',
@@ -36,8 +35,13 @@ interface Company {
 
 const company = ref<Company | null>(null) // Initialize with null
 
+const route = useRoute()
+const _sidestreamId = ref(route.params.sidestreamId as string)
+const _dataRequestorId = ref(route.params.dataRequestorId as string)
+
 const fetchCompanyData = async () => {
-  const response = await axiosClient.get('/sidestream/requestor/21734667-7a32-45f4-97aa-accffc62066d/f1c45496-83ca-48fd-80c0-bb56dbc3a7b6') // Replace with actual params
+  const url = `/sidestream/requestor/21734667-7a32-45f4-97aa-accffc62066d/${_sidestreamId.value}`
+  const response = await axiosClient.get(url)
   company.value = response.data
 }
 

@@ -1,6 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 interface Request {
   dataRequestorId: string
@@ -15,26 +16,19 @@ const axiosClient = axios.create({
   baseURL: 'https://urchin-app-q36en.ondigitalocean.app/backend2',
 })
 
-export default {
-  setup() {
-    const messages = ref<Request[]>([])
+const messages = ref<Request[]>([])
 
-    const loadMessages = async () => {
-      try {
-        const response = await axiosClient.get('/requestaccess/requestor/21734667-7a32-45f4-97aa-accffc62066d') // change to get the ID
-        messages.value = response.data
-      }
-      catch (error) {
-        console.error(error)
-      }
-    }
+const loadMessages = async () => {
+  const response = await axiosClient.get('/requestaccess/requestor/21734667-7a32-45f4-97aa-accffc62066d') // change to get the dataRequestorId
+  messages.value = response.data
+}
 
-    onMounted(loadMessages)
+onMounted(loadMessages)
 
-    return {
-      messages,
-    }
-  },
+const router = useRouter()
+
+const navigateToDetails = (sidestreamId: string, dataRequestorId: string) => {
+  router.push(`/search/Results/${sidestreamId}/${dataRequestorId}`)
 }
 </script>
 
@@ -62,7 +56,8 @@ export default {
               <v-btn
                 :color="request.requestAccessStatus === 'PENDING' ? 'yellow' : request.requestAccessStatus === 'APPROVED' ? 'green' : 'red'"
                 outlined
-                :disabled="request.requestAccessStatus === 'PENDING'"
+                :disabled="request.requestAccessStatus !== 'APPROVED'"
+                @click="navigateToDetails(request.sidestreamId, request.dataRequestorId)"
               >
                 {{ request.requestAccessStatus }}
               </v-btn>

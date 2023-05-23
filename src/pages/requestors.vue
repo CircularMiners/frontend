@@ -68,15 +68,9 @@ async function denyRequest() {
       requestAccessStatus: 'DENIED',
       sidestreamId,
     }
-
-    try {
-      await axiosClient.put(`/requestaccess/${mineRepId}`, payload)
-      detailsDialog.value = false
-      // Perform any additional actions after request denial
-    }
-    catch (error) {
-      console.error(error)
-    }
+    await axiosClient.put(`/requestaccess/${mineRepId}`, payload)
+    detailsDialog.value = false
+    // Perform any additional actions after request denial
   }
 }
 
