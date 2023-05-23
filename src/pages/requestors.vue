@@ -38,14 +38,9 @@ function showDetailsDialog(request: RequestData) {
 }
 
 async function fetchRequests(mineRepId: string) {
-  try {
-    const response = await axiosClient.get<RequestData[]>(`/requestaccess/miner/${mineRepId}`)
-    pendingRequests.value = response.data.filter(request => request.requestAccessStatus === 'PENDING')
-    historyRequests.value = response.data.filter(request => request.requestAccessStatus !== 'PENDING')
-  }
-  catch (error) {
-    console.error(error)
-  }
+  const response = await axiosClient.get<RequestData[]>(`/requestaccess/miner/${mineRepId}`)
+  pendingRequests.value = response.data.filter(request => request.requestAccessStatus === 'PENDING')
+  historyRequests.value = response.data.filter(request => request.requestAccessStatus !== 'PENDING')
 }
 
 async function approveRequest() {
@@ -58,14 +53,9 @@ async function approveRequest() {
       sidestreamId,
     }
 
-    try {
-      await axiosClient.put(`/requestaccess/${mineRepId}`, payload)
-      detailsDialog.value = false
-      // Perform any additional actions after request approval
-    }
-    catch (error) {
-      console.error(error)
-    }
+    await axiosClient.put(`/requestaccess/${mineRepId}`, payload)
+    detailsDialog.value = false
+    // Perform any additional actions after request approval
   }
 }
 

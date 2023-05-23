@@ -37,13 +37,8 @@ interface Company {
 const company = ref<Company | null>(null) // Initialize with null
 
 const fetchCompanyData = async () => {
-  try {
-    const response = await axiosClient.get('/sidestream/requestor/21734667-7a32-45f4-97aa-accffc62066d/f1c45496-83ca-48fd-80c0-bb56dbc3a7b6') // Replace with actual params
-    company.value = response.data
-  }
-  catch (error) {
-    console.error(error)
-  }
+  const response = await axiosClient.get('/sidestream/requestor/21734667-7a32-45f4-97aa-accffc62066d/f1c45496-83ca-48fd-80c0-bb56dbc3a7b6') // Replace with actual params
+  company.value = response.data
 }
 
 const router = useRouter()
