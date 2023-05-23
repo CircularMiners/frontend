@@ -63,7 +63,7 @@ const search = () => {
           <p v-show="isSearchClick && searchTerm && filterResults.length === 0">
             {{ noResultsText }} "{{ searchTerm }}"
           </p>
-          <SearchResults :key="componentKey" :search-term="searchTerm" :filtered-results="filterResults" />
+          <SearchResults :key="componentKey" :search-term="searchTerm" :filtered-results="filterResults" @request-access="sendRequest" />
         </v-col>
       </v-row>
     </v-container>
