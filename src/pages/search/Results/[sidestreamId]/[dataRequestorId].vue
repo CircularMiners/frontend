@@ -31,8 +31,6 @@ interface Company {
   mineralPercentage: string
 }
 
-// const sidestreamId = 'f1c45496-83ca-48fd-80c0-bb56dbc3a7b6' // Replace with the appropriate sidestreamId
-
 const company = ref<Company | null>(null) // Initialize with null
 
 const route = useRoute()
@@ -40,7 +38,7 @@ const _sidestreamId = ref(route.params.sidestreamId as string)
 const _dataRequestorId = ref(route.params.dataRequestorId as string)
 
 const fetchCompanyData = async () => {
-  const url = `/sidestream/requestor/21734667-7a32-45f4-97aa-accffc62066d/${_sidestreamId.value}`
+  const url = `/sidestream/requestor/449cb02f-df1d-4982-87ea-2230815b75f1/${_sidestreamId.value}`
   const response = await axiosClient.get(url)
   company.value = response.data
 }

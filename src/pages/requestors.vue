@@ -26,7 +26,7 @@ const pendingRequests = ref<RequestData[]>([])
 const historyRequests = ref<RequestData[]>([])
 const detailsDialog = ref(false)
 const selectedRequest = ref<RequestData | null>(null)
-const mineRepId = '1782bc72-7188-453f-acac-f3f0c73f2c35' // Replace with your actual mineRepId
+const mineRepId = '4a9f067a-efed-4ac1-8e17-5a316b49ff46' // Replace with your actual mineRepId
 
 onMounted(() => {
   fetchRequests(mineRepId)

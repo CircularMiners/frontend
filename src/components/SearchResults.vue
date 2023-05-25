@@ -13,32 +13,30 @@ const props = defineProps({
     required: true,
   },
 })
-const router = useRouter()
+
+// const router = useRouter()
 const dialog = ref(false)
 const confirmationDialog = ref(false)
 const requestMessage = ref('')
-let requestSideStream: any
+let dialogSideStream: any
 
-// console.log('formSearchResult'+props.filteredResults)
-
-const openAccessPage = function (sideStreamId: string): void {
-  router.push({ path: `Results/${sideStreamId}`, params: { sideStream: sideStreamId } })
-}
-const openDialog = function (sideStreamId: string): void {
-  // console.log(sideStreamId)
-  requestSideStream = props.filteredResults.find((data: any) => data.id === sideStreamId)
+// Function to open the dialog
+const openDialog = function (sidestream: any): void {
+  dialogSideStream = sidestream
   dialog.value = true
   confirmationDialog.value = false
 }
+
+// Function to send the access request
 const sendRequest = async function (): Promise<void> {
   dialog.value = false
 
   const requestData: requestData = {
-    dataRequestorId: '21734667-7a32-45f4-97aa-accffc62066d', // Replace with function to get ID
-    sideStreamId: requestSideStream.id,
+    dataRequestorId: '449cb02f-df1d-4982-87ea-2230815b75f1', // Replace with function to get ID
+    sideStreamId: dialogSideStream.id,
     requestAccessMessage: requestMessage.value,
-
   }
+
   try {
     await sendAccessRequest(requestData)
     confirmationDialog.value = true
@@ -48,33 +46,72 @@ const sendRequest = async function (): Promise<void> {
     // Handle error
   }
 }
+
+// Function to get the requestStatus
+
+const getRequestStatusColor = (requestStatus: string) => {
+  if (requestStatus === 'OPEN')
+    return 'green'
+
+  else if (requestStatus === 'CLOSED')
+    return 'red'
+
+  else
+    return 'yellow'
+}
+
+const getButtonName = (requestStatus: string) => {
+  if (requestStatus === 'OPEN')
+    return 'Open Access'
+
+  else if (requestStatus === 'CLOSED')
+    return 'Request Access'
+
+  else
+    return 'Pending Request'
+}
+
+// open access page
+// const openAccessPage = function (sideStreamId: string, dataRequestorId: string): void {
+//   router.push({ path: `Results/${sideStreamId}/${dataRequestorId}`, params: { sideStream: sideStreamId } })
+// }
+
+// open access page new
+// const openAccessPage = function (sideStreamId: string, dataRequestorId: string): void {
+//   window.open(`/search/Results/${dataRequestorId}/${sideStreamId}`, '_blank')
+// }
 </script>
 
 <template>
   <div>
     <div v-if="props.filteredResults.length > 0">
-      <v-card v-for="(sideStream, index) in props.filteredResults" :key="index" mb="6">
-        <v-card-title>{{ sideStream.companyName }} </v-card-title>
+      <v-card v-for="(sidestream, index) in props.filteredResults" :key="index" mb="6">
+        <v-card-title>{{ sidestream.companyName }} </v-card-title>
         <v-card-text>
-          <p><b>Mine Name:</b> {{ sideStream.mineName }}</p>
-          <p><b>Mine Location:</b> {{ sideStream.mineLocation }}</p>
+          <p><b>Mine Name:</b> {{ sidestream.mineName }}</p>
+          <p><b>Mine Location:</b> {{ sidestream.mineLocation }}</p>
           <p><b>Material:</b></p>
           <p>
-            <span style="padding-left: 6rem;">Material Name: {{ sideStream.meterialName }}</span><br>
-            <span style="padding-left: 6rem;">Material Size: {{ sideStream.size }}</span><br>
-            <span style="padding-left: 6rem;">Material Weight: {{ sideStream.weight }}</span><br>
-            <span style="padding-left: 6rem;">MaterialDescription: {{ sideStream.meterialDescription }}</span>
+            <span style="padding-left: 6rem;">Material Name: {{ sidestream.meterialName }}</span><br>
+            <span style="padding-left: 6rem;">Material Size: {{ sidestream.size }}</span><br>
+            <span style="padding-left: 6rem;">Material Weight: {{ sidestream.weight }}</span><br>
+            <span style="padding-left: 6rem;">MaterialDescription: {{ sidestream.meterialDescription }}</span>
           </p>
         </v-card-text>
         <v-layout justify-end align-start mb="3" mr="3">
-          <v-btn :color="sideStream.access ? 'green' : 'red'" variant="tonal" class="text-subtitle-2" @click="sideStream.access ? openAccessPage(sideStream.id) : openDialog(sideStream.id)">
-            {{ sideStream.access ? 'Open Access' : 'Request Access' }}
+          <v-btn
+            :color="getRequestStatusColor(sidestream.requestStatus)"
+            variant="tonal"
+            class="text-subtitle-2"
+            @click="sidestream.requestStatus === 'OPEN' ? openAccessPage(sidestream.id, '449cb02f-df1d-4982-87ea-2230815b75f1') : openDialog(sidestream)"
+          >
+            {{ getButtonName(sidestream.requestStatus) }}
           </v-btn>
         </v-layout>
         <v-dialog v-model="dialog" persistent width="auto">
           <v-card>
             <v-card-title style="text-align:center; font-weight:bold; font-size:x-large; margin-top: 20px;">
-              Request access for {{ requestSideStream.companyName }}
+              Request access for {{ sidestream.companyName }}
             </v-card-title>
             <v-card-text>
               Write a message to the company. The request will be added to your request history.

@@ -19,7 +19,7 @@ const axiosClient = axios.create({
 const messages = ref<Request[]>([])
 
 const loadMessages = async () => {
-  const response = await axiosClient.get('/requestaccess/requestor/21734667-7a32-45f4-97aa-accffc62066d') // change to get the dataRequestorId
+  const response = await axiosClient.get('/requestaccess/requestor/449cb02f-df1d-4982-87ea-2230815b75f1') // change to get the dataRequestorId
   messages.value = response.data
 }
 
