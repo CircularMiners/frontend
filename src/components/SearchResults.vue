@@ -77,9 +77,9 @@ const getButtonName = (requestStatus: string) => {
 // }
 
 // open access page new
-// const openAccessPage = function (sideStreamId: string, dataRequestorId: string): void {
-//   window.open(`/search/Results/${dataRequestorId}/${sideStreamId}`, '_blank')
-// }
+const openAccessPage = function (sideStreamId: string, dataRequestorId: string): void {
+  window.open(`/search/Results/${sideStreamId}/${dataRequestorId}`, '_blank')
+}
 </script>
 
 <template>

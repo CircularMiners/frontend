@@ -119,10 +119,10 @@ const items = computed(() => {
       <p>No data available.</p>
     </div>
 
-    <WhiteButton
+    <!-- <WhiteButton
       button-name="Back"
       style="margin-top: 20px;"
       @click="router.back()"
-    />
+    /> -->
   </div>
 </template>
