@@ -13,18 +13,18 @@ const forceRerender = () => {
 }
 const search = () => {
   isSearchClick = !isSearchClick
-  if (!searchTerm?.value.toLowerCase()) {
-    return [] // return an empty object as the first value
+  const searchTermValue = searchTerm?.value.trim()
+
+  if (!searchTermValue) {
+    filterResults = []
+    return
   }
-  else {
-    searchBaseOnMaterialName(searchTerm?.value.toLowerCase())
-      .then((res) => {
-      // console.log("test", res);
-        filterResults = res
-        forceRerender()
-      })
-    // console.log(filterResults)
-  }
+
+  searchBaseOnMaterialName(searchTermValue)
+    .then((res) => {
+      filterResults = res
+      forceRerender()
+    })
 }
 </script>
 
