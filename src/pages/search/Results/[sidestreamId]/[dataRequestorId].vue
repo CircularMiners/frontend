@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import axios from 'axios'
 
 const axiosClient = axios.create({
@@ -33,21 +33,20 @@ interface Company {
 
 const company = ref<Company | null>(null) // Initialize with null
 
-const route = useRoute()
-const _sidestreamId = ref(route.params.sidestreamId as string)
-const _dataRequestorId = ref(route.params.dataRequestorId as string)
-
-const fetchCompanyData = async () => {
-  const url = `/sidestream/requestor/449cb02f-df1d-4982-87ea-2230815b75f1/${_sidestreamId.value}`
-  const response = await axiosClient.get(url)
-  company.value = response.data
+const fetchData = async () => {
+  const response = await axiosClient.get('/sidestream/requestor/449cb02f-df1d-4982-87ea-2230815b75f1/edf792ec-41dc-4924-a60e-0e5c42ed4b4d')
+  if (response.data.length > 0) {
+    company.value = response.data[0]
+  }
+  else {
+    // Handle the case when no data is returned
+    company.value = null
+  }
 }
 
-const router = useRouter()
+onMounted(fetchData)
 
-fetchCompanyData()
-
-const items = computed(() => {
+const transformedItems = computed(() => {
   if (company.value) {
     return [
       {
@@ -56,23 +55,19 @@ const items = computed(() => {
         particleSize: company.value.size,
         materialDescription: company.value.materialDescription,
         mineralName: company.value.mineralName,
-        percentage: company.value.mineralPercentage,
-        chemicalCode: company.value.mineralFormula,
+        mineralPercentage: company.value.mineralPercentage,
+        mineralFormula: company.value.mineralFormula,
       },
-    ]
+    ].map((item) => {
+      const transformedItem: any = {}
+      for (const header of headers)
+        transformedItem[header.value] = item[header.value] || 'No Data'
+
+      return transformedItem
+    })
   }
   else {
-    return [
-      {
-        materialName: 'No Data',
-        particleWeight: 'No Data',
-        particleSize: 'No Data',
-        materialDescription: 'No Data',
-        mineralName: 'No Data',
-        percentage: 'No Data',
-        chemicalCode: 'No Data',
-      },
-    ]
+    return []
   }
 })
 </script>
@@ -80,19 +75,20 @@ const items = computed(() => {
 <template>
   <div>
     <v-card v-if="company" class="mb-6">
-      <v-card-title
-        style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;"
-      >
+      <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
         Results for {{ company.companyName }}
       </v-card-title>
       <v-card-text style="font-size: medium;">
         <strong>Mine Name:</strong> {{ company.mineName }} <br>
         <strong>Location:</strong> {{ company.mineLocation }} <br>
-        <strong> Description: </strong> {{ company.mineDescription }}
+        <strong>Description:</strong> {{ company.mineDescription }}
       </v-card-text>
     </v-card>
     <v-card>
-      <div>
+      <div v-if="transformedItems.length === 0">
+        <p>No data available.</p>
+      </div>
+      <div v-else>
         <v-table>
           <thead>
             <tr>
@@ -102,27 +98,17 @@ const items = computed(() => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{{ company?.materialName }}</td>
-              <td>{{ company?.weight }}</td>
-              <td>{{ company?.size }}</td>
-              <td>{{ company?.materialDescription }}</td>
-              <td>{{ company?.mineralName }}</td>
-              <td>{{ company?.mineralFormula }}</td>
-              <td>{{ company?.mineralPercentage }}</td>
+            <tr v-for="item in transformedItems" :key="item.mineralName">
+              <td v-for="header in headers" :key="header.value">
+                {{ item[header.value] }}
+              </td>
             </tr>
           </tbody>
         </v-table>
       </div>
     </v-card>
-    <div v-if="items.length === 0">
+    <div v-if="transformedItems.length === 0">
       <p>No data available.</p>
     </div>
-
-    <!-- <WhiteButton
-      button-name="Back"
-      style="margin-top: 20px;"
-      @click="router.back()"
-    /> -->
   </div>
 </template>
