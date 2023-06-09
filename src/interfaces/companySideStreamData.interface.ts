@@ -7,4 +7,5 @@ export interface companySideStreamData {
   mineName: string
   mineLocation: string
   companyName: string
+  requestStatus: string
 }
