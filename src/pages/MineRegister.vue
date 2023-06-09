@@ -18,13 +18,12 @@ export default {
         mineName: mineName.value,
         mineLocation: mineLocation.value,
         mineDescription: mineDescription.value,
+        mineRepresentativeId: userStore.user?.id,
       }
-
       try {
-        const response = await axios.post('/mine/addmine', data)
+        const response = await axios.post('https://urchin-app-q36en.ondigitalocean.app/backend2/mine/addmine', data)
         // eslint-disable-next-line no-console
         console.log(response.data)
-        userId.value = response.data.mine_representative_id
         // TODO: Handle successful registration
       }
       catch (error) {
@@ -71,7 +70,7 @@ export default {
               </v-row>
             </v-form>
             <div class="registration-separator">
-              <router-link to="/MineRepresentative">
+              <router-link to="/">
                 <v-btn color="#1C658C" text class="registration-btn" @click="register">
                   Register
                 </v-btn>

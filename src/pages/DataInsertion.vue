@@ -15,7 +15,12 @@ interface mineSideStreamFormData {
 }
 
 const selectedMine = ref('')
-const selectedMineral = ref('')
+
+const selectedMineral = ref<CompositionMaterial>({
+  mineralFormula: '',
+  mineralName: '',
+  mineralPercentage: null,
+})
 
 const formData = ref<mineSideStreamFormData>({
   oreName: '',
@@ -104,7 +109,7 @@ onMounted(() => {
         v-model="material.mineralName"
         :items="minerals"
         item-title="mineral_name"
-        item-value="mineral_chemical_formula"
+        item-value="mineral_name"
         label="Select a Mineral"
         outlined
       />

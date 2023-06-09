@@ -22,9 +22,8 @@ export const useUserStore = defineStore('user', {
       const user = await res.json()
       this.user = user
       if (this.user)
-        localStorage.setItem('user-store', JSON.stringify(this.user))
       // eslint-disable-next-line no-console
-      console.log('Credentials submitted successfully')
+        console.log('Credentials submitted successfully')
     },
     async registerRepresentative(name: string, email: string, password: string, companyName: string, phoneNumber: string) {
       const formData = {

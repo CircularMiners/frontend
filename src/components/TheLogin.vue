@@ -59,6 +59,7 @@ const onSubmit = async () => {
         formData.userType.value,
       )
         .then(() => {
+          localStorage.setItem('user-type', formData.userType.value)
           if (userStore?.user)
             router.push('/')
         })
