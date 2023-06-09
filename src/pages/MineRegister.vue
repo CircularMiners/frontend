@@ -85,3 +85,8 @@ export default {
     </v-row>
   </v-container>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+    </route>

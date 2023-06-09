@@ -23,6 +23,8 @@ declare module '@vue/runtime-core' {
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
     TheLogin: typeof import('./components/TheLogin.vue')['default']
+    TheMineSelector: typeof import('./components/TheMineSelector.vue')['default']
+    TheNav: typeof import('./components/TheNav.vue')['default']
     TheRegistrationRepresentatives: typeof import('./components/TheRegistrationRepresentatives.vue')['default']
     TheRegistrationVendors: typeof import('./components/TheRegistrationVendors.vue')['default']
     WhiteButton: typeof import('./components/WhiteButton.vue')['default']

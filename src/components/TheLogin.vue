@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/user'
+const router = useRouter()
 
 const userStore = useUserStore()
 
@@ -23,10 +24,10 @@ const onSubmit = async () => {
       formData.email.value,
       formData.password.value,
       formData.userType.value,
-    )
-    // TODO::route to next page after login
-    // eslint-disable-next-line no-console
-    console.log(userStore.user.id)
+    ).then(() => {
+      if (userStore?.user)
+        router.push('/')
+    })
   }
   catch (error) {
     // eslint-disable-next-line no-console
