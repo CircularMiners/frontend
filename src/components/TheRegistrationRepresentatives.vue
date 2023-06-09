@@ -35,8 +35,10 @@ const onSubmit = async () => {
     <v-text-field v-model="formData.password.value" label="Password" type="password" />
     <v-text-field v-model="formData.companyName.value" label="Company Name" />
     <v-text-field v-model="formData.phoneNumber.value" label="Phone Number" />
-    <v-btn color="primary" block @click.prevent="onSubmit">
-      Submit
+    <v-btn color="#1C658C" block @click.prevent="onSubmit">
+      <span class="text-white">
+        Submit
+      </span>
     </v-btn>
   </v-form>
 </template>
