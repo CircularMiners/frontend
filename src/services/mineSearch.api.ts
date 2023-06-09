@@ -4,7 +4,7 @@ import type { mineData } from '~/interfaces/mineData.interface'
 const userStore = useUserStore()
 
 const axiosClient = axios.create({
-  baseURL: 'https://urchin-app-q36en.ondigitalocean.app/backend2/mine/searchmine?mine_representative_id=',
+  baseURL: 'http://urchin-app-q36en.ondigitalocean.app/backend2/mine/searchmine/',
 })
 
 export async function getMineList() {

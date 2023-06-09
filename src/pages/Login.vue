@@ -23,22 +23,33 @@ const changeRegisterType = (registerType: string) => {
       <v-col cols="12" sm="8" md="6" lg="4" class="align-items-center ml-auto">
         <v-card class="mt-4 pa-10 rounded-xl" :elevation="15" color="radial-gradient(circle, hsla(234, 10%, 20%, 1) 0%, hsla(56, 21%, 52%, 1) 100%)">
           <v-card-title class="text-center" color="#667085">
-            <h5 v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'" class="mb-0 text-h5">
-              Login
-            </h5>
-            <h5 v-else-if="stringRegisterType === 'representative'" class="mb-0 text-h5">
-              Register as a Representative
-            </h5>
-            <h5 v-else-if="stringRegisterType === 'vendor'" class="mb-0 text-h5">
-              Register as a Data Requestor
-            </h5>
+            <v-row align="center" class="align-center">
+              <v-col v-if="stringRegisterType === 'representative' || stringRegisterType === 'vendor'" cols="2">
+                <v-btn icon @click="changeRegisterType('')">
+                  <v-icon color="#1C658C">
+                    mdi-arrow-left
+                  </v-icon>
+                </v-btn>
+              </v-col>
+              <v-col cols="10">
+                <h5 v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'" class="mb-0 text-h5 text-center">
+                  Login
+                </h5>
+                <h5 v-else-if="stringRegisterType === 'representative'" class="mb-0 text-h5">
+                  Register as a Representative
+                </h5>
+                <h5 v-else-if="stringRegisterType === 'vendor'" class="mb-0 text-h5">
+                  Register as a Data Requestor
+                </h5>
+              </v-col>
+            </v-row>
           </v-card-title>
           <v-card-text>
             <TheLogin v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'" />
             <TheRegistrationRepresentatives v-else-if="stringRegisterType === 'representative'" />
             <TheRegistrationVendors v-else-if="stringRegisterType === 'vendor'" />
             <div v-if="stringRegisterType !== 'representative' && stringRegisterType !== 'vendor'">
-              <p class="text-body-1 mt-10">
+              <p class="text-body-1 mt-10 text-center">
                 Don't have an account? Register now.
               </p>
               <v-row>
@@ -78,8 +89,3 @@ const changeRegisterType = (registerType: string) => {
         bottom: 40px;
       }
 </style>
-
-<route lang="yaml">
-meta:
-  requiresAuth: false
-</route>
