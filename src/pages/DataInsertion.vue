@@ -120,3 +120,8 @@ onMounted(() => {
     </v-btn>
   </v-form>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

@@ -68,3 +68,8 @@ const navigateToDetails = (sidestreamId: string, dataRequestorId: string) => {
     </v-card>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

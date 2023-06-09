@@ -1,19 +1,20 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useUserStore } from '~/stores/user'
 
 export default {
   name: 'MineRegistration',
   setup() {
-    // const mineId = ref('')
     const mineName = ref('')
     const mineLocation = ref('')
     const mineDescription = ref('')
 
+    const userStore = useUserStore()
+    const userId = ref('')
+
     async function register() {
-      const { userId } = useUserStore()
       const data = {
-        // mineId: mineId.value,
         mineName: mineName.value,
         mineLocation: mineLocation.value,
         mineDescription: mineDescription.value,
@@ -23,8 +24,7 @@ export default {
         const response = await axios.post('/mine/addmine', data)
         // eslint-disable-next-line no-console
         console.log(response.data)
-        // eslint-disable-next-line no-const-assign, unused-imports/no-unused-vars
-        userId = response.data.mine_representative_id
+        userId.value = response.data.mine_representative_id
         // TODO: Handle successful registration
       }
       catch (error) {
@@ -34,7 +34,6 @@ export default {
     }
 
     return {
-      // mineId,
       mineName,
       mineLocation,
       mineDescription,
@@ -56,9 +55,6 @@ export default {
           <v-card-text>
             <v-form @submit.prevent="register">
               <v-row>
-                <!-- <v-col cols="12" md="6">
-                  <v-text-field v-model="mineId" label="Mine ID" class="registration-text-field" />
-                </v-col> -->
                 <v-col cols="12" md="6">
                   <v-text-field v-model="mineName" label="Mine Name" class="registration-text-field" />
                 </v-col>
@@ -67,6 +63,8 @@ export default {
                 <v-col cols="12" md="6">
                   <v-text-field v-model="mineLocation" label="Mine Location" class="registration-text-field" />
                 </v-col>
+              </v-row>
+              <v-row>
                 <v-col cols="12" md="6">
                   <v-text-field v-model="mineDescription" label="Mine Description" class="registration-text-field" />
                 </v-col>
@@ -89,4 +87,4 @@ export default {
 <route lang="yaml">
 meta:
   requiresAuth: true
-    </route>
+</route>
