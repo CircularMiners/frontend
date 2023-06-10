@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useResetStore } from '~/utils/useResetStore'
+const router = useRouter()
 const userStore = useUserStore()
 const componentKey = ref(0)
 const forceRerender = () => {
@@ -9,6 +11,14 @@ const userType = computed(() => localStorage.getItem('user-type'))
 onMounted(() => {
   forceRerender()
 })
+
+const resetStore = useResetStore()
+
+const logout = () => {
+  resetStore.user()
+  localStorage.removeItem('user-type')
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -36,7 +46,7 @@ onMounted(() => {
       <v-divider />
       <v-list-item prepend-icon="mdi-face-agent" title="Support" value="support" /> -->
       <v-divider />
-      <v-list-item prepend-icon="mdi-logout" title="Logout" value="logout" />
+      <v-list-item prepend-icon="mdi-logout" title="Logout" value="logout" @click="logout" />
     </v-list>
   </v-navigation-drawer>
 </template>
