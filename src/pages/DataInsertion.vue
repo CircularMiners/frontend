@@ -99,7 +99,7 @@ onMounted(() => {
     <v-text-field v-model="formData.weight" type="number" label="Weight" required />
     <v-text-field v-model="formData.size" type="number" label="Size" required />
 
-    <v-card v-for="(material, index) in formData.compositionMaterial" :key="index" class="mb-4">
+    <v-card v-for="(material, index) in formData.compositionMaterial" :key="index" class="mb-4 pa-4">
       <v-card-title class="headline">
         Composition Material {{ index + 1 }}
       </v-card-title>
