@@ -2,15 +2,7 @@
 import { useResetStore } from '~/utils/useResetStore'
 const router = useRouter()
 const userStore = useUserStore()
-const componentKey = ref(0)
-const forceRerender = () => {
-  if (userStore.user?.id)
-    componentKey.value += 1
-}
 const userType = computed(() => localStorage.getItem('user-type'))
-onMounted(() => {
-  forceRerender()
-})
 
 const resetStore = useResetStore()
 
@@ -24,7 +16,6 @@ const logout = () => {
 <template>
   <v-navigation-drawer
     v-if="userStore.user?.id"
-    :key="componentKey"
     expand-on-hover
     rail
   >
