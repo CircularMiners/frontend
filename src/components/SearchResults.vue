@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { requestData } from '~/interfaces/requestData.interface'
-import { sendAccessRequest } from '~/services/request.api.ts'
+import { sendAccessRequest } from '~/services/request.api'
 
 const props = defineProps({
   searchTerm: {

@@ -21,7 +21,6 @@ const onSubmit = async () => {
       formData.companyName.value,
       formData.phoneNumber.value,
     )
-    router.push('/login')
   }
   catch (error) {
     console.error('Error submitting form', error)

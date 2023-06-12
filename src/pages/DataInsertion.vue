@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { getMineList } from '~/services/mineSearch.api.ts'
-import { getMineralList } from '~/services/mineralSearch.api.ts'
-import { createSideStreamData } from '~/services/createSideStreamData.api.ts'
+import { getMineList } from '~/services/mineSearch.api'
+import { getMineralList } from '~/services/mineralSearch.api'
+import { createSideStreamData } from '~/services/createSideStreamData.api'
 import type { CompositionMaterial } from '~/interfaces/compositionMaterial.interface'
 import type { mineData } from '~/interfaces/mineData.interface'
 const userStore = useUserStore()
@@ -18,8 +18,7 @@ const selectedMine = ref('')
 
 const selectedMineral = ref<CompositionMaterial>({
   mineralFormula: '',
-  mineralName: '',
-  mineralPercentage: null,
+  mineralPercentage: 0,
 })
 
 const formData = ref<mineSideStreamFormData>({
@@ -32,9 +31,8 @@ const formData = ref<mineSideStreamFormData>({
 
 const addMaterial = () => {
   formData.value.compositionMaterial.push({
-    mineralFormula: selectedMineral.mineral_chemical_formula,
-    mineralName: selectedMineral.mineral_name,
-    mineralPercentage: null,
+    mineralFormula: selectedMineral.value.mineralFormula,
+    mineralPercentage: 0,
   })
 }
 
@@ -106,10 +104,10 @@ onMounted(() => {
         Composition Material {{ index + 1 }}
       </v-card-title>
       <v-select
-        v-model="material.mineralName"
+        v-model="material.mineralFormula"
         :items="minerals"
         item-title="mineral_name"
-        item-value="mineral_name"
+        item-value="mineral_chemical_formula"
         label="Select a Mineral"
         outlined
       />

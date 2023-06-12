@@ -19,8 +19,11 @@ export const useUserStore = defineStore('user', {
         },
         body: JSON.stringify(formData),
       })
-      const user = await res.json()
-      this.user = user
+      const response = await res.json()
+      if (response.message !== 'validated')
+        alert('Wrong Username or Password')
+      else
+        this.user = response
       if (this.user)
       // eslint-disable-next-line no-console
         console.log('Credentials submitted successfully')
@@ -40,8 +43,11 @@ export const useUserStore = defineStore('user', {
         },
         body: JSON.stringify(formData),
       })
-      const user = await res.json()
-      this.user = user
+      const response = await res.json()
+      if (response.message === 'User already exists')
+        alert('User already exists')
+      else
+        window.location.href = '/login'
     },
     async registerVendor(name: string, email: string, password: string, companyName: string) {
       const formData = {
@@ -57,8 +63,11 @@ export const useUserStore = defineStore('user', {
         },
         body: JSON.stringify(formData),
       })
-      const user = await res.json()
-      this.user = user
+      const response = await res.json()
+      if (response.message === 'User already exists')
+        alert('User already exists')
+      else
+        window.location.href = '/login'
     },
   },
   persist: true,

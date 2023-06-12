@@ -1,45 +1,31 @@
-<script>
+<script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
 import { useUserStore } from '~/stores/user'
 
-export default {
-  name: 'MineRegistration',
-  setup() {
-    const mineName = ref('')
-    const mineLocation = ref('')
-    const mineDescription = ref('')
+const mineName = ref('')
+const mineLocation = ref('')
+const mineDescription = ref('')
 
-    const userStore = useUserStore()
-    const userId = ref('')
+const userStore = useUserStore()
 
-    async function register() {
-      const data = {
-        mineName: mineName.value,
-        mineLocation: mineLocation.value,
-        mineDescription: mineDescription.value,
-        mineRepresentativeId: userStore.user?.id,
-      }
-      try {
-        const response = await axios.post('https://urchin-app-q36en.ondigitalocean.app/backend2/mine/addmine', data)
-        // eslint-disable-next-line no-console
-        console.log(response.data)
-        // TODO: Handle successful registration
-      }
-      catch (error) {
-        console.error(error)
-        // TODO: Handle registration error
-      }
-    }
-
-    return {
-      mineName,
-      mineLocation,
-      mineDescription,
-      userId,
-      register,
-    }
-  },
+async function register() {
+  const data = {
+    mineName: mineName.value,
+    mineLocation: mineLocation.value,
+    mineDescription: mineDescription.value,
+    mineRepresentativeId: userStore.user?.id,
+  }
+  try {
+    const response = await axios.post('https://urchin-app-q36en.ondigitalocean.app/backend2/mine/addmine', data)
+    // eslint-disable-next-line no-console
+    console.log(response.data)
+    // TODO: Handle successful registration
+  }
+  catch (error) {
+    console.error(error)
+    // TODO: Handle registration error
+  }
 }
 </script>
 
