@@ -8,7 +8,8 @@ const resetStore = useResetStore()
 
 const logout = () => {
   resetStore.user()
-  localStorage.removeItem('user-type')
+  if (typeof window !== 'undefined')
+    localStorage.removeItem('user-type')
   router.push('/login')
 }
 </script>
