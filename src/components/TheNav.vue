@@ -28,8 +28,9 @@ const logout = () => {
     <v-divider />
     <v-list density="compact" nav>
       <v-list-item prepend-icon="mdi-home" title="Home" to="/" />
-      <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-minecraft" title="Mine Registration" to="/MineRegister" />
+      <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-mine" title="Mine Registration" to="/MineRegister" />
       <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-database-plus" title="Data insertion" to="/datainsertion" />
+      <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-database" title="Data insertion" to="/sidestreamlist" />
       <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-share-variant" title="Data sharing" to="/requestors" />
       <v-list-item v-if="userType === 'requestor'" prepend-icon="mdi-magnify" title="Search" to="/search/searchpage" />
       <v-list-item v-if="userType === 'requestor'" prepend-icon="mdi-share-variant" title="Data sharing" to="/search/History/history" />
