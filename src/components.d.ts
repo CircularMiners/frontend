@@ -12,9 +12,11 @@ declare module '@vue/runtime-core' {
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Tester: typeof import('./components/Tester.vue')['default']
-    TheCounter: typeof import('./components/TheCounter.vue')['default']
-    TheFooter: typeof import('./components/TheFooter.vue')['default']
-    TheInput: typeof import('./components/TheInput.vue')['default']
+    SearchResults: typeof import('./components/SearchResults.vue')['default']
+    TheLogin: typeof import('./components/TheLogin.vue')['default']
+    TheNav: typeof import('./components/TheNav.vue')['default']
+    TheRegistrationRepresentatives: typeof import('./components/TheRegistrationRepresentatives.vue')['default']
+    TheRegistrationVendors: typeof import('./components/TheRegistrationVendors.vue')['default']
+    WhiteButton: typeof import('./components/WhiteButton.vue')['default']
   }
 }
