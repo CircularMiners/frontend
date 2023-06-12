@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <div class="home">
     <h1>Welcome to the home page!</h1>
@@ -12,3 +16,8 @@
     height: 100%;
   }
   </style>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+    </route>

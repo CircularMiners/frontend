@@ -112,3 +112,8 @@ const transformedItems = computed(() => {
     </div>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+  </route>

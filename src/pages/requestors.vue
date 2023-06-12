@@ -26,7 +26,8 @@ const pendingRequests = ref<RequestData[]>([])
 const historyRequests = ref<RequestData[]>([])
 const detailsDialog = ref(false)
 const selectedRequest = ref<RequestData | null>(null)
-const mineRepId = '4a9f067a-efed-4ac1-8e17-5a316b49ff46' // Replace with your actual mineRepId
+const userStore = useUserStore()
+const mineRepId = userStore.user?.id // Replace with your actual mineRepId
 
 onMounted(() => {
   fetchRequests(mineRepId)
@@ -182,3 +183,8 @@ function cancelRequest() {
     </v-dialog>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

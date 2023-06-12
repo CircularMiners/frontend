@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/user'
+const router = useRouter()
 
 const userStore = useUserStore()
 
@@ -20,7 +21,6 @@ const onSubmit = async () => {
       formData.companyName.value,
       formData.phoneNumber.value,
     )
-    window.location.reload()
   }
   catch (error) {
     console.error('Error submitting form', error)

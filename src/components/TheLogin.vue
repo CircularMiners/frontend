@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/user'
-// import { ref } from 'vue'
+const router = useRouter()
 
 const userStore = useUserStore()
-
 const formData = {
   email: ref(''),
   password: ref(''),
@@ -59,6 +58,11 @@ const onSubmit = async () => {
         formData.password.value,
         formData.userType.value,
       )
+        .then(() => {
+          localStorage.setItem('user-type', formData.userType.value)
+          if (userStore?.user)
+            router.push('/')
+        })
       // eslint-disable-next-line no-console
       console.log(userStore.user.id)
       // TODO: Route to next page after successful login

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { requestData } from '~/interfaces/requestData.interface'
-import { sendAccessRequest } from '~/services/request.api.ts'
+import { sendAccessRequest } from '~/services/request.api'
 
 const props = defineProps({
   searchTerm: {
@@ -13,6 +13,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const userStore = useUserStore()
 
 // const router = useRouter()
 const dialog = ref(false)
@@ -32,7 +34,7 @@ const sendRequest = async function (): Promise<void> {
   dialog.value = false
 
   const requestData: requestData = {
-    dataRequestorId: '449cb02f-df1d-4982-87ea-2230815b75f1', // Replace with function to get ID
+    dataRequestorId: userStore.user?.id, // Replace with function to get ID
     sideStreamId: dialogSideStream.id,
     requestAccessMessage: requestMessage.value,
   }

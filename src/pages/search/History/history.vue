@@ -18,8 +18,10 @@ const axiosClient = axios.create({
 
 const messages = ref<Request[]>([])
 
+const userStore = useUserStore()
+
 const loadMessages = async () => {
-  const response = await axiosClient.get('/requestaccess/requestor/449cb02f-df1d-4982-87ea-2230815b75f1') // change to get the dataRequestorId
+  const response = await axiosClient.get(`/requestaccess/requestor/${userStore.user?.id}`) // change to get the dataRequestorId
   messages.value = response.data
 }
 
@@ -68,3 +70,8 @@ const navigateToDetails = (sidestreamId: string, dataRequestorId: string) => {
     </v-card>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>
