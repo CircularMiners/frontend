@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MarqueeText from 'vue-marquee-text-component'
 import VideoBackground from 'vue-responsive-video-background-player'
+import MineVideo from '../assets/MineVideo.mp4'
 const stringRegisterType = ref('')
 
 const changeRegisterType = (registerType: string) => {
@@ -10,14 +11,14 @@ const changeRegisterType = (registerType: string) => {
 
 <template>
   <VideoBackground
-    src="assets/MineVideo.mp4"
+    :src="MineVideo"
     style="max-height: 400vh; height: 100vh"
     overlay="linear-gradient(153deg, #37332D00 0%, #66708500 0%, #667085 100%)"
   >
     <v-container pa-0 fluid>
       <v-col cols="12" sm="8" md="6" lg="4" class="d-flex justify-center align-center ml-auto">
         <div class="logo-text">
-          <img src="../../assets/MineMatchLogo.png" alt="Logo" class="logo">
+          <img src="../assets/MineMatchLogo.png" alt="Logo" class="logo">
         </div>
       </v-col>
       <v-col cols="12" sm="8" md="6" lg="4" class="align-items-center ml-auto">
