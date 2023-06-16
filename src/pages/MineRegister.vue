@@ -30,25 +30,23 @@ async function register() {
 </script>
 
 <template>
-  <v-card class="registration-card">
-    <v-card-title class="text-center registration-title">
-      <h2>Register the Mine</h2>
-    </v-card-title>
-    <v-card-text>
-      <v-form @submit.prevent="register">
-        <v-text-field v-model="mineName" label="Mine Name" class="registration-text-field" />
-        <v-text-field v-model="mineLocation" label="Mine Location" class="registration-text-field" />
-        <v-text-field v-model="mineDescription" label="Mine Description" class="registration-text-field" />
-      </v-form>
-      <div class="registration-separator">
-        <router-link to="/">
-          <v-btn color="primary" text class="registration-btn" @click="register">
-            Register
-          </v-btn>
-        </router-link>
-      </div>
-    </v-card-text>
-  </v-card>
+  <v-card-title class="text-center registration-title">
+    <h2>Register the Mine</h2>
+  </v-card-title>
+  <v-card-text>
+    <v-form @submit.prevent="register">
+      <v-text-field v-model="mineName" label="Mine Name" class="registration-text-field" />
+      <v-text-field v-model="mineLocation" label="Mine Location" class="registration-text-field" />
+      <v-text-field v-model="mineDescription" label="Mine Description" class="registration-text-field" />
+    </v-form>
+    <div class="registration-separator">
+      <router-link to="/">
+        <v-btn color="primary" text class="registration-btn" @click="register">
+          Register
+        </v-btn>
+      </router-link>
+    </div>
+  </v-card-text>
 </template>
 
 <route lang="yaml">

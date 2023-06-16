@@ -82,70 +82,66 @@ function cancelRequest() {
 
 <template>
   <div>
-    <v-card>
-      <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
-        Pending Requests
-      </v-card-title>
-      <v-table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Company Name</th>
-            <th>Message</th>
-            <th>Date</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="request in pendingRequests" :key="request.dataRequestorId" style="margin-bottom: 10px;">
-            <td>{{ request.dataRequestorName }}</td>
-            <td>{{ request.dataRequestorEmail }}</td>
-            <td>{{ request.dataRequestorCompanyName }}</td>
-            <td>{{ request.requestAccessMessage }}</td>
-            <td>{{ formatDate(request.requestAccessDatetime) }}</td>
-            <td>
-              <v-btn
-                color="blue"
-                variant="tonal" class="text-subtitle-2"
-                outlined
-                @click="showDetailsDialog(request)"
-              >
-                Details
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </v-table>
-    </v-card>
+    <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
+      Pending Requests
+    </v-card-title>
+    <v-table>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Company Name</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="request in pendingRequests" :key="request.dataRequestorId" style="margin-bottom: 10px;">
+          <td>{{ request.dataRequestorName }}</td>
+          <td>{{ request.dataRequestorEmail }}</td>
+          <td>{{ request.dataRequestorCompanyName }}</td>
+          <td>{{ request.requestAccessMessage }}</td>
+          <td>{{ formatDate(request.requestAccessDatetime) }}</td>
+          <td>
+            <v-btn
+              color="blue"
+              variant="tonal" class="text-subtitle-2"
+              outlined
+              @click="showDetailsDialog(request)"
+            >
+              Details
+            </v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
 
-    <v-card>
-      <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
-        History of requests
-      </v-card-title>
-      <v-table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Company Name</th>
-            <th>Message</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="request in historyRequests" :key="request.dataRequestorId" style="margin-bottom: 10px;">
-            <td>{{ request.dataRequestorName }}</td>
-            <td>{{ request.dataRequestorEmail }}</td>
-            <td>{{ request.dataRequestorCompanyName }}</td>
-            <td>{{ request.requestAccessMessage }}</td>
-            <td>{{ formatDate(request.requestAccessDatetime) }}</td>
-            <td>{{ request.requestAccessStatus }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-    </v-card>
+    <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
+      History of requests
+    </v-card-title>
+    <v-table>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Company Name</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="request in historyRequests" :key="request.dataRequestorId" style="margin-bottom: 10px;">
+          <td>{{ request.dataRequestorName }}</td>
+          <td>{{ request.dataRequestorEmail }}</td>
+          <td>{{ request.dataRequestorCompanyName }}</td>
+          <td>{{ request.requestAccessMessage }}</td>
+          <td>{{ formatDate(request.requestAccessDatetime) }}</td>
+          <td>{{ request.requestAccessStatus }}</td>
+        </tr>
+      </tbody>
+    </v-table>
 
     <!-- Details dialog -->
     <v-dialog v-model="detailsDialog" max-width="500px">

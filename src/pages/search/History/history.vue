@@ -29,45 +29,43 @@ onMounted(loadMessages)
 
 const router = useRouter()
 
-const navigateToDetails = (sidestreamId: string, dataRequestorId: string) => {
-  router.push(`/search/Results/${sidestreamId}/${dataRequestorId}`)
+const navigateToDetails = (dataRequestorId: string, sidestreamId: string) => {
+  router.push(`/search/results/${dataRequestorId}/${sidestreamId}`)
 }
 </script>
 
 <template>
   <div class="history">
-    <v-card>
-      <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
-        Request History
-      </v-card-title>
-      <v-table>
-        <thead>
-          <tr>
-            <th>Sidestream Name</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(request, index) in messages" :key="index">
-            <td>{{ request.sidestreamName }}</td>
-            <td>{{ request.requestAccessDatetime }}</td>
-            <td>{{ request.sidestreamDescription }}</td>
-            <td>
-              <v-btn
-                :color="request.requestAccessStatus === 'PENDING' ? 'yellow' : request.requestAccessStatus === 'APPROVED' ? 'green' : 'red'"
-                outlined
-                :disabled="request.requestAccessStatus !== 'APPROVED'"
-                @click="navigateToDetails(request.sidestreamId, request.dataRequestorId)"
-              >
-                {{ request.requestAccessStatus }}
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </v-table>
-    </v-card>
+    <v-card-title style="text-align:center; font-weight:bold; font-size: xx-large; margin-top: 20px;">
+      Request History
+    </v-card-title>
+    <v-table>
+      <thead>
+        <tr>
+          <th>Sidestream Name</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(request, index) in messages" :key="index">
+          <td>{{ request.sidestreamName }}</td>
+          <td>{{ request.requestAccessDatetime }}</td>
+          <td>{{ request.sidestreamDescription }}</td>
+          <td>
+            <v-btn
+              :color="request.requestAccessStatus === 'PENDING' ? 'yellow' : request.requestAccessStatus === 'APPROVED' ? 'green' : 'red'"
+              outlined
+              :disabled="request.requestAccessStatus !== 'APPROVED'"
+              @click="navigateToDetails(request.dataRequestorId, request.sidestreamId)"
+            >
+              {{ request.requestAccessStatus }}
+            </v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
   </div>
 </template>
 
