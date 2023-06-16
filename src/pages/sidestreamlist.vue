@@ -56,8 +56,27 @@ const deleteSideStream = async (sidestreamId: string) => {
     const response = await deleted(sidestreamId)
     // Handle successful deletion
     if (response) {
-      // Remove the deleted sidestream from the list
-      sideStreams.value = sideStreams.value.filter(s => s.id !== sidestreamId)
+      // Find the group and sidestream to be deleted
+      let groupIndex = -1
+      let sidestreamIndex = -1
+
+      Object.keys(sideStreams.value).forEach((groupId) => {
+        const group = sideStreams.value[groupId]
+        const index = group.findIndex(s => s.id === sidestreamId)
+        if (index !== -1) {
+          groupIndex = groupId
+          sidestreamIndex = index
+        }
+      })
+
+      // Remove the deleted sidestream from the group
+      if (groupIndex !== -1 && sidestreamIndex !== -1)
+        sideStreams.value[groupIndex].splice(sidestreamIndex, 1)
+
+      // If the group becomes empty, remove it from sideStreams
+      if (sideStreams.value[groupIndex].length === 0)
+        delete sideStreams.value[groupIndex]
+
       forceRerender()
     }
   }
@@ -67,10 +86,25 @@ const deleteSideStream = async (sidestreamId: string) => {
   }
 }
 
+const groupSidestreamsById = (sidestreams: CompositionMaterialForListing[]) => {
+  const groupedSidestreams: Record<string, CompositionMaterialForListing[]> = {}
+
+  sidestreams.forEach((sidestream) => {
+    // eslint-disable-next-line no-prototype-builtins
+    if (groupedSidestreams.hasOwnProperty(sidestream.id))
+      groupedSidestreams[sidestream.id].push(sidestream)
+
+    else
+      groupedSidestreams[sidestream.id] = [sidestream]
+  })
+
+  return groupedSidestreams
+}
+
 const selectedMine = async () => {
   const res = await getSideStreamList(userStore.user?.id, selected.value?.mine_id)
   if (res) {
-    sideStreams.value = res
+    sideStreams.value = groupSidestreamsById(res)
     forceRerender()
   }
 }
@@ -100,30 +134,36 @@ onMounted(() => {
     @update:model-value="selectedMine"
   />
   <h1>Mine Sidestreams</h1>
-  <h2 v-if="sideStreams.length === 0">
+  <h2 v-if="Object.keys(sideStreams).length === 0">
     No sidestreams found
   </h2>
-  <v-card v-for="sidestream in sideStreams" :key="sidestream.id" outlined mt-4>
-    <v-card-title>
-      <span class="headline">{{ sidestream.oreName }}</span>
-    </v-card-title>
-    <v-card-text>
-      <div>Weight: {{ sidestream.weight }}</div>
-      <div>Size: {{ sidestream.size }}</div>
-      <div>Description: {{ sidestream.SidestreamDescription }}</div>
-      <div v-if="sidestream.mineralName">
-        Mineral Name: {{ sidestream.mineralName }}
-      </div>
-      <div v-if="sidestream.mineralFormula">
-        Mineral Formula: {{ sidestream.mineralFormula }}
-      </div>
-      <div v-if="sidestream.mineralPercentage">
-        Mineral Percentage: {{ sidestream.mineralPercentage }}
-      </div>
-    </v-card-text>
-    <v-btn class="delete-button" @click="showConfirmationDialog(sidestream.id)">
+  <v-card v-for="(sidestreams, id) in sideStreams" :key="id" outlined mt-4>
+    <v-btn class="delete-button" @click="showConfirmationDialog(sidestreams[0].id)">
       <v-icon>mdi-delete</v-icon>
     </v-btn>
+    <v-card-title>
+      <span class="headline">{{ sidestreams[0].oreName }}</span>
+    </v-card-title>
+    <v-card-text>
+      <div>
+        <div>Weight: {{ sidestreams[0].weight }}</div>
+        <div>Size: {{ sidestreams[0].size }}</div>
+        <div>Description: {{ sidestreams[0].SidestreamDescription }}</div>
+      </div>
+      <hr>
+      <div v-for="sidestream in sidestreams" :key="sidestream.id">
+        <div v-if="sidestream.mineralName">
+          Mineral Name: {{ sidestream.mineralName }}
+        </div>
+        <div v-if="sidestream.mineralFormula">
+          Mineral Formula: {{ sidestream.mineralFormula }}
+        </div>
+        <div v-if="sidestream.mineralPercentage">
+          Mineral Percentage: {{ sidestream.mineralPercentage }}
+        </div>
+        <br>
+      </div>
+    </v-card-text>
   </v-card>
   <v-dialog v-model="confirmDialogVisible" max-width="400">
     <v-card>

@@ -34,7 +34,7 @@ const logout = () => {
       <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-database" title="Side Stream Listing" to="/sidestreamlist" />
       <v-list-item v-if="userType === 'representative'" prepend-icon="mdi-share-variant" title="Data sharing" to="/requestors" />
       <v-list-item v-if="userType === 'requestor'" prepend-icon="mdi-magnify" title="Search" to="/search/searchpage" />
-      <v-list-item v-if="userType === 'requestor'" prepend-icon="mdi-share-variant" title="Data sharing" to="/search/History/history" />
+      <v-list-item v-if="userType === 'requestor'" prepend-icon="mdi-share-variant" title="Data sharing" to="/search/history/history" />
       <!-- <v-list-item prepend-icon="mdi-account-group" title="Customer" value="customer" />
       <v-divider />
       <v-list-item prepend-icon="mdi-face-agent" title="Support" value="support" /> -->

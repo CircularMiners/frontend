@@ -73,14 +73,9 @@ const getButtonName = (requestStatus: string) => {
     return 'Pending Request'
 }
 
-// open access page
-// const openAccessPage = function (sideStreamId: string, dataRequestorId: string): void {
-//   router.push({ path: `Results/${sideStreamId}/${dataRequestorId}`, params: { sideStream: sideStreamId } })
-// }
-
 // open access page new
-const openAccessPage = function (sideStreamId: string, dataRequestorId: string): void {
-  window.open(`/search/Results/${sideStreamId}/${dataRequestorId}`, '_blank')
+const openAccessPage = function (dataRequestorId: string, sideStreamId: string): void {
+  window.open(`/search/results/${dataRequestorId}/${sideStreamId}`, '_blank')
 }
 </script>
 
@@ -105,7 +100,7 @@ const openAccessPage = function (sideStreamId: string, dataRequestorId: string):
             :color="getRequestStatusColor(sidestream.requestStatus)"
             variant="tonal"
             class="text-subtitle-2"
-            @click="sidestream.requestStatus === 'OPEN' ? openAccessPage(sidestream.id, '449cb02f-df1d-4982-87ea-2230815b75f1') : openDialog(sidestream)"
+            @click="sidestream.requestStatus === 'OPEN' ? openAccessPage(userStore?.user?.id, sidestream.id) : openDialog(sidestream)"
           >
             {{ getButtonName(sidestream.requestStatus) }}
           </v-btn>
