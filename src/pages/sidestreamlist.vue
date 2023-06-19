@@ -146,20 +146,20 @@ onMounted(() => {
     </v-card-title>
     <v-card-text>
       <div>
-        <div>Weight: {{ sidestreams[0].weight }}</div>
-        <div>Size: {{ sidestreams[0].size }}</div>
-        <div>Description: {{ sidestreams[0].SidestreamDescription }}</div>
+        <div>Weight: <b>{{ sidestreams[0].weight }}</b> T</div>
+        <div>Size: <b>{{ sidestreams[0].size }}</b> m<sup>3</sup></div>
+        <div>Description: <b>{{ sidestreams[0].SidestreamDescription }}</b></div>
       </div>
       <hr>
       <div v-for="sidestream in sidestreams" :key="sidestream.id">
         <div v-if="sidestream.mineralName">
-          Mineral Name: {{ sidestream.mineralName }}
+          Mineral Name: <b>{{ sidestream.mineralName }}</b>
         </div>
         <div v-if="sidestream.mineralFormula">
-          Mineral Formula: {{ sidestream.mineralFormula }}
+          Mineral Formula: <b>{{ sidestream.mineralFormula }}</b>
         </div>
         <div v-if="sidestream.mineralPercentage">
-          Mineral Percentage: {{ sidestream.mineralPercentage }}
+          Mineral Percentage: <b>{{ sidestream.mineralPercentage }}</b>
         </div>
         <br>
       </div>
