@@ -11,6 +11,7 @@
 > Mine Match requires Node >=14.18
 
 If you want to run the Backend on your local please visit <a href="https://github.com/CircularMiners/backend">Backend Repo</a> and follow the instruction there 
+
 <mark>!!! Please note that you will have to change the Backend url from https://urchin-app-q36en.ondigitalocean.app/backend2 by Search through the whole project and "Replace All" with your Backend url <mark>
 ### Clone to local
 
@@ -54,4 +55,4 @@ Run the image and specify port mapping with the `-p` flag.
 docker run --rm -it -p 8080:80 minematch:latest
 ```
 
-### This application use Opinionated Vite Starter Template by Anthony Fu Lookout for more here => <a href="https://github.com/antfu/vitesse">Vitesse</a>
+### This application use Opinionated Vite Starter Template by Anthony Fu Find out for more here => <a href="https://github.com/antfu/vitesse">Vitesse</a>
