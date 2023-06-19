@@ -54,4 +54,4 @@ Run the image and specify port mapping with the `-p` flag.
 docker run --rm -it -p 8080:80 minematch:latest
 ```
 
-### This application use Opinionated Vite Starter Template by Anthony Fu Lookout for more here => <a href="https://stirring-monstera-d635e6.netlify.app/">Vitesse</a>
+### This application use Opinionated Vite Starter Template by Anthony Fu Lookout for more here => <a href="https://github.com/antfu/vitesse">Vitesse</a>
