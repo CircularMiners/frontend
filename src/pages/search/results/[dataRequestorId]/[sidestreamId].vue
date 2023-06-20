@@ -10,8 +10,8 @@ const axiosClient = axios.create({
 
 const headers = [
   { label: 'Material Name', value: 'materialName' },
-  { label: 'Weight', value: 'weight' },
-  { label: 'Size', value: 'size' },
+  { label: 'Weight (T)', value: 'weight' },
+  { label: 'Size (m³)', value: 'size' },
   { label: 'Material Description', value: 'materialDescription' },
   { label: 'Mineral Name', value: 'mineralName' },
   { label: 'Mineral Formula', value: 'mineralFormula' },

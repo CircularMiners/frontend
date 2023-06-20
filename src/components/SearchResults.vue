@@ -90,8 +90,8 @@ const openAccessPage = function (dataRequestorId: string, sideStreamId: string):
           <p><b>Material:</b></p>
           <p>
             <span style="padding-left: 6rem;">Material Name: {{ sidestream.meterialName }}</span><br>
-            <span style="padding-left: 6rem;">Material Size: {{ sidestream.size }}</span><br>
-            <span style="padding-left: 6rem;">Material Weight: {{ sidestream.weight }}</span><br>
+            <span style="padding-left: 6rem;">Material Size: {{ sidestream.size }} m<sup>3</sup></span><br>
+            <span style="padding-left: 6rem;">Material Weight: {{ sidestream.weight }} T</span><br>
             <span style="padding-left: 6rem;">MaterialDescription: {{ sidestream.meterialDescription }}</span>
           </p>
         </v-card-text>
